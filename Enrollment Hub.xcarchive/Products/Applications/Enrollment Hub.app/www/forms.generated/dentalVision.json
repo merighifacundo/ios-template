@@ -1,0 +1,11 @@
+{
+  "name": "dentalVision",
+  "id": "dentalVision",
+  "mappedEntity": "Application",
+  "navType": "",
+  "sections": [],
+  "typeName": "IDV (Individual Dental/Vision)",
+  "helper": "DentalVisionFormHelper",
+  "group": "Individual",
+  "enable": true
+}

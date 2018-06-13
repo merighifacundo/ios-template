@@ -1,0 +1,12 @@
+{
+"api_errors": [],
+"data": [
+  {
+  	"question": "Do you understand that some of our network pharmacies have preferred cost-sharing?  You may pay less for covered {{plan.understand}}"
+  },
+  {
+  	"question": "Do you understand {{plan.understandDeductible}} <b>${{plan.deductible}}</b> deductible?"
+  }
+],
+"success": true
+}

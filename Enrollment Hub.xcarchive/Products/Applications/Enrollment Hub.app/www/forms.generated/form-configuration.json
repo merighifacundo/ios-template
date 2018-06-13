@@ -1,0 +1,96 @@
+{
+  "files": [
+    {
+      "name": "ccsnp",
+      "mappedEntity": "",
+      "typeName": "Qualifying Questions",
+      "id": "ccsnp"
+    },
+    {
+      "name": "eligibility-form",
+      "mappedEntity": "",
+      "helper": "EligibilityHelper",
+      "typeName": "Elegibility Form",
+      "id": "eligibility-form"
+    },
+    {
+      "name": "groupMedicare",
+      "mappedEntity": "Application",
+      "helper": "GroupMedicareFormHelper",
+      "typeName": "Group Medicare",
+      "id": "groupMedicare",
+      "group": "Group Individual"
+    },
+    {
+      "name": "location-form",
+      "mappedEntity": "location-form",
+      "helper": "MedicareFormHelper",
+      "typeName": "location-form",
+      "id": "location-form"
+    },
+    {
+      "name": "ls-rules"
+    },
+    {
+      "name": "MA",
+      "mappedEntity": "MA",
+      "helper": "MAFormHelper",
+      "id": "MA"
+    },
+    {
+      "name": "MAPD",
+      "mappedEntity": "MAPD",
+      "helper": "MAPDFormHelper",
+      "id": "MAPD"
+    },
+    {
+      "name": "medicare",
+      "mappedEntity": "Application",
+      "helper": "MedicareFormHelper",
+      "typeName": "Medicare - (MA, MAPD, PDP)",
+      "id": "medicare",
+      "group": "Individual"
+    },
+    {
+      "name": "medSupp",
+      "mappedEntity": "Application",
+      "helper": "MedSuppFormController",
+      "typeName": "Med Supp",
+      "id": "medSupp",
+      "group": "Medicare Supplement",
+      "componentType":"button-medsupp"
+    },
+    {
+      "name": "member"
+    },
+    {
+      "name": "osb",
+      "mappedEntity": "Application",
+      "helper": "OsbFormHelper",
+      "typeName": "OSB add-on",
+      "id": "osb",
+      "group": "Individual"
+    },
+    {
+      "name": "dentalVision",
+      "mappedEntity": "Application",
+      "helper": "DentalVisionFormHelper",
+      "typeName": "IDV (Individual Dental/Vision)",
+      "id": "dentalVision",
+      "group": "Individual",
+      "componentType":"button-idv"
+    },    
+    {
+      "name": "PDP",
+      "mappedEntity": "PDP",
+      "helper": "PDPFormHelper",
+      "id": "PDP"
+    },
+    {
+      "name": "test",
+      "mappedEntity": "Application",
+      "helper": "PdpFormHelper",
+      "id": "formPDP"
+    }
+  ]
+}

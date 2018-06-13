@@ -1,0 +1,19 @@
+{
+  "name": "location-form",
+  "id": "location-form",
+  "mappedEntity": "location-form",
+  "navType": "none",
+  "sections": [
+    {
+      "name": "location",
+      "id": "location",
+      "title": "",
+      "index": 0,
+      "subsections": [],
+      "fields": [],
+      "hidden": false
+    }
+  ],
+  "typeName": "location-form",
+  "helper": "MedicareFormHelper"
+}

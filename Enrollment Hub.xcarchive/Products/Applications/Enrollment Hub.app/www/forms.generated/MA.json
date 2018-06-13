@@ -1,0 +1,3440 @@
+{
+  "name": "MA",
+  "id": "MA",
+  "mappedEntity": "MA",
+  "applicationType":"IND",
+  "helper": "MAFormHelper",
+  "sections": [
+    {
+      "name": "Mandatory Information",
+      "id": "mandatory-information",
+      "title": "Mandatory Information",
+      "index": 1,
+      "subsections": [
+        {
+          "name": "Disclosures",
+          "id": "disclosure-statement",
+          "title": "Disclosure Statement",
+          "longName": "Disclosure Statement",
+          "fields": [
+            {
+              "id": "Disclosure",
+              "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}Disclosure",
+                "group":"FormIndividualMandatoryInformation"
+              },
+
+              "type": "Disclaimer",
+              "mandatory": false,
+              "width": "5",
+              "triggers": []
+            }
+          ],
+          "hidden": false
+        },
+        {
+          "name": "Acknowledgement",
+          "id": "acknowledgement",
+          "title": "Acknowledgement",
+          "fields": [
+            {
+              "name": "Based on what we have discussed, is it your understanding that this plan provides coverage for",
+              "triggersLasLoad": [
+                {
+                  "name": "PlanTypeName",
+                  "MAPD": {
+                    "addName": " <strong>medical AND prescription drugs?</strong>"
+                  },
+                  "MA": {
+                    "addName": " <strong>medical ONLY?</strong>"
+                  },
+                  "PDP": {
+                    "addName": " <strong>prescription drug coverage ONLY?</strong>"
+                  }
+                }
+              ],
+              "id": "understandingCoverage",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": true,
+              "width": "3",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "basicUnderstandingIndicator",
+              "errorsOnValue": [
+                {
+                  "value": false,
+                  "error": "You have indicated that the plan selected does not match the applicant's intended plan. Select YES to agree to this plan or return home and select a different plan"
+                }
+              ]
+            },
+            {
+              "name": "Do you agree that I notified you that <strong>Optional Supplemental Benefits</strong> are available with this plan?",
+              "id": "understandingCoverageOsb",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": true,
+              "width": "3",
+              "triggersLasLoad": [
+                {
+                  "name": "additionalCoverage"
+                },
+                {
+                  "name": "hasOsbPlan"
+                },
+                {
+                  "name": "hasOsbPlanSelected"
+                }
+              ],
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "understandingCoverageOsb",
+              "errorsOnValue": [
+                {
+                  "value": false,
+                  "error": "You have indicated that the plan selected does not match the applicant's intended plan. Select YES to agree to this plan or return home and select a different plan"
+                }
+              ]
+            }
+          ],
+          "hidden": false
+        }
+      ],
+      "fields": [],
+      "hidden": false
+    },
+    {
+      "name": "Decision maker",
+      "id": "decisionMaker",
+      "title": "Decision Maker",
+      "index": 2,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "Please tell us who is completing your application form.",
+          "id": "personCompleting",
+          "hidden": false,
+          "mandatory": true,
+          "width": "10",
+          "fromSOA":"beneficiarySignatoryType",
+          "mappedAttribute": "personCompleting",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "user",
+              "name": "I'm completing my application on my own."
+            },
+            {
+              "key": "other",
+              "name": "I have Power of Attorney (POA) or other authorization under state law and am applying on someone's behalf."
+            }
+          ],
+          "commentsOnValue": [
+            {
+              "value": "other",
+              "comment": "(Please note: Power of Attorney must cover the ability to make healthcare decisions and usually referred to as a Durable Power of Attorney for Healthcare or Healthcare Power of Attorney. You will be receiving a request for supporting documentation upon your enrollment.  This supporting documentation is required in order to remain on the plan.)"
+            }
+          ],
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "poaFirstName",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaLastName",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaAddress1",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaAddress2",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaCity",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaState",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaZip",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaPhoneNumber",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaPhoneType",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "poaRelationWithApplicant",
+                  "action": "showOrHide",
+                  "value": "other"
+                },
+                {
+                  "id": "signature_user",
+                  "action": "copyValue",
+                  "variable": "POAEnabled"
+                },
+                {
+                  "id": "ecPoaEmergencyContact",
+                  "action": "hideByPOA",
+                  "checkFieldId": "ecProvideAgreement"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "poaFirstName",
+          "name": "POA First Name",
+          "type": "Text",
+          "mappedAttribute": "poaFirstName",
+          "mandatory": true,
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "signature_user",
+                  "action": "copyValue",
+                  "variable": "POAFirstName"
+                },
+                {
+                  "id": "ecFirstName",
+                  "action": "copyValue",
+                  "variable": "POAFirstName"
+                }
+              ]
+            }
+          ],
+          "width": 5,
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "hidden": true,
+          "fromAppointment": "poaFirstNameSOA"
+        },
+        {
+          "id": "poaLastName",
+          "name": "Last Name",
+          "type": "Text",
+          "mappedAttribute": "poaLastName",
+          "mandatory": true,
+          "skipSummary": true,
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "signature_user",
+                  "action": "copyValue",
+                  "variable": "POALastName"
+                },
+                {
+                  "id": "ecLastName",
+                  "action": "copyValue",
+                  "variable": "POALastName"
+                }
+              ]
+            }
+          ],
+          "width": "5",
+          "minlength": 2,
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "hidden": true,
+          "fromAppointment": "poaLastNameSOA"
+        },
+        {
+          "id": "poaAddress1",
+          "name": "POA Address 1",
+          "type": "Text",
+          "mappedAttribute": "poaAddress1",
+          "mandatory": true,
+          "triggers": [],
+          "width": 5,
+          "hidden": true,
+          "maxlength": 70,
+          "restriction": "alphanumerics",
+          "fromAppointment": "poaAddress1SOA"
+        },
+        {
+          "id": "poaAddress2",
+          "name": "Address 2",
+          "type": "Text",
+          "mappedAttribute": "poaAddress2",
+          "triggers": [],
+          "width": 5,
+          "hidden": true,
+          "maxlength": 70,
+          "restriction": "alphanumerics",
+          "skipSummary": true
+        },
+        {
+          "id": "poaCity",
+          "name": "City",
+          "type": "Text",
+          "mappedAttribute": "poaCity",
+          "mandatory": true,
+          "triggers": [],
+          "width": 5,
+          "restriction": "city",
+          "minlength": 2,
+          "hidden": true,
+          "fromAppointment": "poaCitySOA"
+        },
+        {
+          "id": "poaState",
+          "name": "State",
+          "type": "Dropdown",
+          "mappedAttribute": "poaState",
+          "mandatory": true,
+          "datasource": "state",
+          "triggers": [],
+          "width": 5,
+          "hidden": true,
+          "skipSummary": true,
+          "fromAppointment": "poaStateSOA"
+        },
+        {
+          "id": "poaZip",
+          "name": "Zip Code",
+          "type": "ZipCode",
+          "maxlength": 5,
+          "mappedAttribute": "poaZip",
+          "mandatory": true,
+          "restriction": "numbers",
+          "triggers": [],
+          "disableValidations": true,
+          "width": 3,
+          "hidden": true,
+          "skipSummary": true,
+          "fromAppointment": "poaZipSOA"
+        },
+        {
+          "id": "poaPhoneNumber",
+          "name": "POA Phone Number",
+          "type": "Phone",
+          "restriction": "Phone",
+          "mappedAttribute": "poaPhoneNumber",
+          "mandatory": true,
+          "comment": "Example: 555-345-2134",
+          "triggers": [{
+            "name": "onChange",
+            "actions": [
+              {
+                "id": "poaPhoneType",
+                "action": "showOrHide",
+                "checkEmpty": true,
+                "value": "",
+                "fromField": "poaPhoneNumber"
+              },{
+                "id": "ecPhone",
+                "action": "copyValue",
+                "variable": "poaPhoneNumber"
+              }
+            ]
+          }],
+          "hidden": true,
+          "fromAppointment": "poaPhoneNumberSOA"
+        },
+        {
+          "name": "Phone Type",
+          "id": "poaPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "poafccDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "poaFccFirstQuestion",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "poaFccSecondQuestion",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "poaPhoneType",
+          "source": [
+            {
+              "key": "cellphone",
+              "name": "Cell Phone"
+            },
+            {
+              "key": "home",
+              "name": "Home (land line)"
+            }
+          ],
+          "fromMember": "phoneType"
+        },
+        {
+          "name": "",
+          "id": "poafccDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 3,
+          "contentQuery": {
+            "addBrand": true,
+            "key": "Disclaimer",
+            "group": "FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery": {
+            "addBrand": true,
+            "key": "QuestionPlanInformation",
+            "group": "FormIndividualPreferenceFCC"
+          },
+          "id": "poaFccFirstQuestion",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 3,
+          "mappedAttribute": "poaFccFirstQuestion",
+          "type": "Radiogroup",
+          "source": "YES/NO"
+        },
+        {
+          "nameQuery": {
+            "addBrand": true,
+            "key": "QuestionMarketing",
+            "group": "FormIndividualPreferenceFCC"
+          },
+          "id": "poaFccSecondQuestion",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 3,
+          "mappedAttribute": "poaFccSecondQuestion",
+          "type": "Radiogroup",
+          "source": "YES/NO"
+        },
+        {
+          "id": "poaRelationWithApplicant",
+          "name": "Relationship to applicant",
+          "type": "Dropdown",
+          "mappedAttribute": "poaRelationWithApplicant",
+          "mandatory": true,
+          "triggers": [{
+              "id": "ecRelationWithApplicant",
+              "action": "copyValue",
+              "variable": "POARelationWithApplicant"
+          }],
+          "width": 5,
+          "maxlength": 255,
+          "hidden": true,
+          "fromAppointment": "poaRelationWithBeneficiarySOA",
+          "source": [
+            {
+              "key": "other",
+              "name": "Other"
+            },
+            {
+              "key": "spouse",
+              "name": "Spouse"
+            },
+            {
+              "key": "sibling",
+              "name": "Sibling"
+            },
+            {
+              "key": "parent",
+              "name": "Parent"
+            },
+            {
+              "key": "child",
+              "name": "Child"
+            },
+            {
+              "key": "agentBroker",
+              "name": "Agent/Broker"
+            },
+            {
+              "key": "friend",
+              "name": "Friend"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Medicare Information",
+      "id": "medicareInformation",
+      "title": "Medicare Card Information",
+      "index": 3,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "informationText",
+          "hidden": false,
+          "type": "Disclaimer",
+          "triggers": [],
+          "content": "To complete this section, refer to your Medicare card.  Please fill in the information exactly as it appears on your card."
+        },
+        {
+          "id": "fieldLastName",
+          "name": "Last Name",
+          "type": "Text",
+          "mappedAttribute": "lastName",
+          "mandatory": true,
+          "triggers": [
+					{
+							"name": "onChange",
+							"actions": [
+								{
+									"action": "disableByCopy",
+									"id": "fieldLastName"
+								}
+							]
+					}],
+          "width": "5",
+          "minlength": 2,
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "fromAppointment": "beneficiaryLastName",
+          "fromMember": "lastName"
+        },
+        {
+          "id": "fieldMI",
+          "name": "Middle Initial",
+          "type": "Text",
+          "mappedAttribute": "middleInitial",
+          "triggers": [
+					{
+							"name": "onChange",
+							"actions": [
+								{
+									"action": "disableByCopy",
+									"id": "fieldMI"
+								}
+							]
+					}],
+          "width": "2",
+          "maxlength": 1,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true,
+          "fromAppointment": "beneficiaryMiddleName",
+          "fromMember": "middleInitial"
+        },
+        {
+          "id": "fieldFirstName",
+          "name": "First Name",
+          "type": "Text",
+          "mappedAttribute": "firstName",
+          "mandatory": true,
+          "triggers": [
+					{
+							"name": "onChange",
+							"actions": [
+								{
+									"action": "disableByCopy",
+									"id": "fieldFirstName"
+								}
+							]
+					}],
+          "width": "5",
+          "maxlength": 20,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "fromAppointment": "beneficiaryName",
+          "fromMember": "firstName",
+          "skipSummary": true
+        },
+        {
+          "id": "medicareNumber",
+          "name": "Medicare Number",
+          "type": "InformationLabel",
+          "mappedAttribute": "medicareId",
+          "fromLaS": "medicareId",
+          "mandatory": false,
+          "restriction": "MedicareNumber",
+          "triggers": [],
+          "width": "5",
+          "saveAsObject": true
+        },
+        {
+          "id": "gender",
+          "name": "Gender",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "Male",
+              "name": "Male"
+            },
+            {
+              "key": "Female",
+              "name": "Female"
+            }
+          ],
+          "mappedAttribute": "gender",
+          "mandatory": true,
+          "triggers": [],
+          "width": "3",
+          "fromMember": "gender"
+        },
+        {
+          "id": "partA",
+          "name": "Hospital Insurance (Part A)",
+          "type": "InformationLabel",
+          "mappedAttribute": "PartAEffectiveDate",
+          "fromLaS": "partA",
+          "mandatory": false,
+          "restriction": "partDates",
+          "triggers": [],
+          "width": "5"
+        },
+        {
+          "id": "partB",
+          "name": "Hospital Insurance (Part B)",
+          "type": "InformationLabel",
+          "mappedAttribute": "PartBEffectiveDate",
+          "fromLaS": "partB",
+          "mandatory": false,
+          "restriction": "partDates",
+          "triggers": [],
+          "width": "5"
+        },
+        {
+          "id": "dob",
+          "name": "Date of Birth",
+          "type": "InformationLabel",
+		      "restriction": "dob",
+          "mappedAttribute": "dob",
+          "fromLaS": "dob",
+          "mandatory": false,
+          "triggers": [],
+          "width": "5",
+          "fromMember": "dateOfBirth"
+        }
+      ],
+      "summaryMask": true
+    },
+    {
+        "name": "Election Period",
+        "id": "Election-Period",
+        "title": "Election Period",
+        "index": 4,
+        "subsections": [],
+        "fields": [
+          {
+            "name": "",
+            "id": "informationText",
+            "hidden": false,
+            "type": "Disclaimer",
+            "triggers": [],
+            "content": "Typically you may only enroll in a Medicare Advantage or Prescription Drug Plan during the Annual Election Period (AEP) between October 15th and December 7th of each year.  However, there are exceptions that may allow you to enroll in a Medicare Advantage or Prescription Drug Plan outside of those election periods. Selection of an option below certifies that to the best of your knowledge, the consumer is eligible for the Enrollment Period selected.  If we later determine that this information is incorrect, the consumer may be dis-enrolled."
+          },
+          {
+              "id": "todayDate",
+              "name": "",
+              "type": "TodayDate",
+              "mappedAttribute": "todayDate",
+              "mandatory": false,
+              "triggers": [],
+              "width": "5"
+          },
+          {
+            "id": "electionPeriodTypes",
+            "name": "Election Period types",
+            "mandatory": true,
+            "type": "EPLGroup",
+            "mappedAttribute": "electionPeriodCode",
+            "source": [
+              {
+                "key": "AEP",
+                "name": "AEP",
+                "description": "Available: {{date.start}} - {{date.end}}\n\nUsage: Only 1 AEP election may be used per year."
+              },
+              {
+                "key": "IEP",
+                "name": "IEP",
+                "description": "Available: For PDP or MAPD - Three months before, the month of, and three months after becoming eligible of Medicare."
+              },
+              {
+                "key": "ICEP",
+                "name": "ICEP",
+                "description": "Available:\nFor MA-only - Three months before, the month of, and three months after becoming eligible of Medicare.\nFor delayed Part B for MA or MAPD - During the three months prior to the Part B effective date."
+              },
+              {
+                "key": "OEPI",
+                "name": "OEPI",
+                "description": "Available: Can be used all year\n\nUsage: Starts the month a beneficiary is institutionalized and ends 2 months after the beneficiary moves out of an institution."
+              },
+              {
+                "key": "SEP",
+                "name": "SEP",
+                "description": "<b>Typically, you may enroll in a Medicare Advantage or Prescription Drug plan during the Annual Enrollment Period between October 15 and December 7 of each year.</b> There are exceptions that may allow you to enroll outside of this period. Please read the following statements carefully and select the option that applies to the applicant. By selecting any of the following SEP options you are certifying that, to the best of your knowledge, the text is a true statement about the applicant. If we later determine that this information is incorrect, the applicant may be disenrolled."
+              }
+            ],
+            "triggers": [{
+              "name": "onChange",
+              "actions": [{
+                  "id": "sepReasonCode",
+                  "action": "showOrHide",
+                  "value": "SEP"
+                },{
+                  "id": "sepDisclaimer",
+                  "action": "showOrHide",
+                  "value": "SEP"
+                },{
+                  "id": "sepDisclaimer",
+                  "action": "populate",
+                  "value": "SEP"
+                },{
+                  "id": "proposedEffectiveDate",
+                  "action": "populateEffectiveDate",
+                  "additionalDateInputField": "sepReasonAdditionalDate",
+                  "proposedEffectiveDatesOutputField": "proposedEffectiveDate"
+                }]
+            }],
+            "width": 12,
+            "hidden": false
+          },
+          {
+            "id": "sepDisclaimer",
+            "name": "",
+            "type": "Disclaimer",
+            "hidden": true,
+            "mandatory": false,
+            "width": 3,
+            "contentQuery": {
+                "addBrand":false,
+                "key":"AttestationAcknowledgement",
+                "group":"SEP"
+            }
+          },
+          {
+              "name": "SEP reason code",
+              "id": "sepReasonCode",
+              "triggers": [
+                {
+                    "name": "onChange",
+                    "actions": [
+                      {
+                        "id": "sepReasonAdditionalText",
+                        "action": "showOrHideBySep",
+                        "not_includes": "Date"
+                      },
+                      {
+                        "id": "sepReasonAdditionalDate",
+                        "action": "showOrHideBySep",
+                        "includes": "Date"
+                      },
+                      {
+                        "id": "proposedEffectiveDate",
+                        "action": "populateEffectiveDate",
+                        "isReason": true,
+                        "additionalDateInputField": "sepReasonAdditionalDate",
+                        "proposedEffectiveDatesOutputField": "proposedEffectiveDate"
+                      }
+                    ]
+                }
+              ],
+              "mandatory": true,
+              "hidden": true,
+              "width": 5,
+              "mappedAttribute": "SpecialElectionPeriodCode",
+              "type": "Dropdown",
+              "datasource": "sepReasons"
+          },
+          {
+            "nameQuery" : {
+              "group": "SepReasons"
+            },
+            "id": "sepReasonAdditionalText",
+            "name": "",
+            "type": "TextArea",
+            "maxlength": 500,
+            "mappedAttribute": "sepReasonAdditionalText",
+            "hidden": true,
+            "mandatory": true,
+            "triggers": [],
+            "width": 5
+          },
+          {
+            "nameQuery" : {
+              "group": "SepReasons"
+            },
+            "id": "sepReasonAdditionalDate",
+            "name": "",
+            "type": "Datepicker",
+            "mappedAttribute": "sepReasonAdditionalDate",
+            "hidden": true,
+            "mandatory": true,
+            "triggers": [
+                {
+                    "name": "onChange",
+                    "actions": [
+                      {
+                        "id": "proposedEffectiveDate",
+                        "action": "populateEffectiveDate",
+                        "isReason": false,
+                        "additionalDateInputField": "sepReasonAdditionalDate",
+                        "proposedEffectiveDatesOutputField": "proposedEffectiveDate"
+                      }
+                    ]
+                }
+              ],
+            "width": 5
+          },
+          {
+            "name": "Proposed effective date",
+            "id": "proposedEffectiveDate",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": true,
+            "width": 5,
+            "mappedAttribute": "effectiveDate",
+            "type": "Dropdown",
+            "datasource": "effectiveDateSource",
+            "fieldToCheck": "sepReasonAdditionalDate",
+            "customValidation":"sepDropdownValidation",
+            "customError": "Based on the information provided you are not eligible for this election period at this time."
+          }
+        ]
+      },
+    {
+      "name": "ESRD",
+      "longName": "End-Stage Renal Disease (ESRD)",
+      "id": "ESRD",
+      "title": "End-Stage Renal Disease",
+      "index": 5,
+      "subsections": [],
+      "fields": [
+        {
+          "id": "esrd",
+          "name": "Have you been diagnosed with End-Stage Renal Disease (ESRD)?",
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "endStageRenalDiseaseIndicator",
+          "mandatory": true,
+          "width": "3",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "esrdOtherHealthPlan",
+                  "action": "showOrHide",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "esrdOtherHealthPlan",
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"OtherHealthPlan",
+            "group":"FormIndividualSSRD"
+          },
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "endStageRenalDiseaseOtherHealthPlanIndicator",
+          "width": "3",
+          "hidden": true,
+          "mandatory": true,
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "esrdHadPreviousEnroll",
+                  "action": "showOrHide",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "esrdHadPreviousEnroll",
+          "name": "Were you enrolled in a Medicare Advantage plan which was terminated or discontinued after December 31, 1998 AND are you making your first election since then?",
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "endStageRenalDiseaseMedicareChoiceIndicator",
+          "width": "3",
+          "hidden": true,
+          "mandatory": true,
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "esrdTransplant",
+                  "action": "showOrHide",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "esrdTransplant",
+          "name": "Have you had a successful kidney transplant?",
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "endStageRenalDiseaseKidneyTransplantIndicator",
+          "width": "3",
+          "hidden": true,
+          "mandatory": true,
+          "errorsOnValue": [
+            {
+              "value": false,
+              "error": "Based in the responses provided, you are ineligible to enroll."
+            }
+          ],
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "esrdDialysis",
+                  "action": "showOrHide",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "esrdDialysis",
+          "name": "Do you still require regular dialysis?",
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "endStageRenalDiseaseRegularDialysisIndicator",
+          "width": "3",
+          "hidden": true,
+          "mandatory": true,
+          "errorsOnValue": [
+            {
+              "value": true,
+              "error": "Based in the responses provided, you are ineligible to enroll."
+            }
+          ],
+          "triggers": []
+        }
+      ],
+      "summaryMask": true
+    },
+    {
+      "name": "Demographics",
+      "id": "Demographics",
+      "title": "Demographics",
+      "index": 6,
+      "subsections": [
+        {
+          "name": "Residential Address",
+          "id": "residentialAdress",
+          "title": "Applicant Address (Physical street address required - No P.O. Boxes)",
+          "fields": [
+            {
+              "name": "Street Address 1",
+              "id": "raStreet1",
+              "triggers": [],
+              "hidden": false,
+              "maxlength": 70,
+              "mandatory": true,
+              "width": 5,
+              "type": "Text",
+              "mappedAttribute": "raStreet1",
+              "fromAppointment": "beneficiaryAddress1",
+              "customValidation": "poboxValidation",
+              "restriction": "address",
+              "fromMember": "address1"
+            },
+            {
+              "name": "Street Address 2",
+              "id": "raStreet2",
+              "triggers": [],
+              "hidden": false,
+              "maxlength": 70,
+              "mandatory": false,
+              "width": 5,
+              "type": "Text",
+              "mappedAttribute": "raStreet2",
+              "fromAppointment": "beneficiaryAddress2",
+              "customValidation": "poboxValidation",
+              "restriction": "address",
+              "skipSummary": true,
+              "fromMember": "address2"
+            },
+            {
+              "name": "City",
+              "id": "raCity",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": true,
+              "width": 5,
+              "restriction": "city",
+              "minlength": 2,
+              "type": "Text",
+              "mappedAttribute": "raCity",
+              "fromAppointment": "city",
+              "fromMember": "city"
+            },
+            {
+              "name": "County",
+              "id": "raCounty",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "type": "InformationLabel",
+              "fromLaS": "County",
+              "mappedAttribute": "county",
+              "fromAppointment": "beneficiaryCity"
+            },
+            {
+              "name": "fipsCode",
+              "id": "fipsCode",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "type": "Hidden",
+              "fromLaS": "fipsCode",
+              "mappedAttribute": "fipsCode"
+            },
+            {
+              "name": "State",
+              "id": "raState",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "type": "InformationLabel",
+              "fromLaS": "State",
+              "mappedAttribute": "state",
+              "skipSummary": true
+            },
+            {
+              "name": "Zip Code",
+              "id": "Zip",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "type": "InformationLabel",
+              "fromLaS": "Zip",
+              "mappedAttribute": "zip",
+              "skipSummary": true
+            }
+          ],
+          "hidden": false
+        },
+        {
+          "name": "Mailing Address",
+          "id": "mailingAddress",
+          "title": "Applicant Mailing Address <span class=\"title-notation\">(If different from physical address)</span>",
+          "fields": [
+            {
+              "name": "Check if your mailing address is different from your physical address",
+              "id": "maIsDifferentMailAddress",
+              "hidden": false,
+              "mandatory": false,
+              "width": 12,
+              "mappedAttribute": "maIsDifferentMailAddress",
+              "type": "CheckBox",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "maStreet1",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "maStreet2",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "maCity",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "MaApplicantState",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "maZip",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Street Address 1",
+              "id": "maStreet1",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "type": "Text",
+              "mappedAttribute": "maStreet1",
+              "restriction": "address"
+            },
+            {
+              "name": "Street Address 2",
+              "id": "maStreet2",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": false,
+              "width": 5,
+              "type": "Text",
+              "mappedAttribute": "maStreet2",
+              "restriction": "address",
+              "skipSummary": true
+            },
+            {
+              "name": "City",
+              "id": "maCity",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "restriction": "city",
+              "minlength": 2,
+              "mappedAttribute": "maCity",
+              "type": "Text"
+            },
+            {
+              "name": "State",
+              "id": "MaApplicantState",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "type": "Dropdown",
+              "datasource": "state",
+              "mappedAttribute": "maState",
+              "skipSummary": true
+            },
+            {
+              "name": "Zip code",
+              "id": "maZip",
+              "triggers": [],
+              "disableValidations": true,
+              "hidden": true,
+              "mandatory": true,
+              "width": 3,
+              "type": "ZipCode",
+              "mappedAttribute": "maZip",
+              "maxlength": 5,
+              "minlength": 5,
+              "skipSummary": true
+            }
+          ],
+          "hidden": false
+        },
+        {
+          "name": "Contact Info",
+          "id": "contactInfo",
+          "title": "Contact information",
+          "fields": [
+            {
+              "name": "Applicant Phone Number",
+              "id": "ciApplicantPhone",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "ciPhoneType",
+                      "action": "showOrHide",
+                      "checkEmpty": true,
+                      "value": "",
+                      "fromField": "ciApplicantPhone"
+                    },
+                    {
+                      "id": "prefCommunicationMethod",
+                      "action": "forceChangeEvent",
+                      "value": ""
+                    }
+                  ]
+                }
+              ],
+              "hidden": false,
+              "mandatory": false,
+              "type": "Phone",
+              "restriction": "Phone",
+              "mappedAttribute": "ciApplicantPhone",
+              "fromAppointment":"beneficiaryPhone",
+              "fromMember": "phoneNumber"
+            },
+            {
+              "name": "Phone Type",
+              "id": "ciPhoneType",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fccDisclaimer",
+                      "action": "showOrHide",
+                      "value": "cellphone"
+                    },
+                    {
+                      "id": "fccFirstQuestion",
+                      "action": "showOrHide",
+                      "value": "cellphone"
+                    },
+                    {
+                      "id": "fccSecondQuestion",
+                      "action": "showOrHide",
+                      "value": "cellphone"
+                    }
+                  ]
+                }
+              ],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "type": "Radiogroup",
+              "mappedAttribute": "ciPhoneType",
+              "source": [
+                {
+                  "key": "cellphone",
+                  "name": "Cell Phone"
+                },
+                {
+                  "key": "home",
+                  "name": "Home (land line)"
+                }
+              ],
+              "fromMember": "phoneType"
+            },
+            {
+              "name": "",
+              "id": "fccDisclaimer",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": false,
+              "width": 3,
+              "contentQuery" : {
+                  "addBrand": true,
+                  "key":"Disclaimer",
+                  "group":"FormIndividualPreferenceFCC"
+              },
+              "type": "Disclaimer"
+            },
+            {
+              "nameQuery" : {
+                  "addBrand":true,
+                  "key":"QuestionPlanInformation",
+                  "group":"FormIndividualPreferenceFCC"
+              },
+              "id": "fccFirstQuestion",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 3,
+              "mappedAttribute": "fccFirstQuestion",
+              "type": "Radiogroup",
+              "source": "YES/NO"
+            },
+            {
+              "nameQuery" : {
+                  "addBrand":true,
+                  "key":"QuestionMarketing",
+                  "group":"FormIndividualPreferenceFCC"
+              },
+              "id": "fccSecondQuestion",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 3,
+              "mappedAttribute": "fccSecondQuestion",
+              "type": "Radiogroup",
+              "source": "YES/NO"
+            },
+            {
+              "name": "Applicant Email",
+              "id": "ciApplicantEmail",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "ciConfirmMail",
+                      "action": "showOrHide",
+                      "fromField": "ciApplicantEmail",
+                      "checkEmpty": true,
+                      "value": ""
+                    },
+                    {
+                      "id": "prefCommunicationMethod",
+                      "action": "forceChangeEvent",
+                      "value": ""
+                    },
+                    {
+                      "id": "prefCommunicationsQuestion",
+                      "action": "forceChangeEvent",
+                      "value": ""
+                    },
+                    {
+                      "action": "hasToBeDifferent",
+                      "id": "agentEmail"
+                    },
+                    {
+                      "action": "hasToBeEquals",
+                      "id": "ciConfirmMail",
+                      "errorsOn": "ciConfirmMail"
+                    }
+                  ]
+                }
+              ],
+              "stopccp": true,
+              "hidden": false,
+              "mandatory": false,
+              "width": 6,
+              "type": "Text",
+              "mappedAttribute": "ciApplicantEmail",
+              "restriction": "email",
+              "fromMember": "email"
+            },
+            {
+              "name": "Confirm Email",
+              "id": "ciConfirmMail",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "prefCommunicationMethod",
+                      "action": "forceChangeEvent",
+                      "value": ""
+                    },
+                    {
+                      "id": "prefCommunicationsQuestion",
+                      "action": "forceChangeEvent",
+                      "value": ""
+                    },
+                    {
+                      "action": "hasToBeEquals",
+                      "id": "ciApplicantEmail",
+                      "errorsOn": "ciConfirmMail"
+                    }
+                  ]
+                }
+              ],
+              "hidden": true,
+              "mandatory": true,
+              "width": 6,
+              "mappedAttribute": "ciConfirmMail",
+              "customValidation": "ciApplicantEmail",
+              "type": "Text",
+              "restriction": "email",
+              "stopccp": true,
+              "fromMember": "email"
+            }
+          ],
+          "hidden": false,
+          "summaryMask": true
+        },
+        {
+          "name": "Emergency Contact",
+          "id": "emergencyContact",
+          "title": "Emergency Contact Information",
+          "fields": [
+            {
+              "name": "I wish to provide an Emergency Contact",
+              "id": "ecProvideAgreement",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "ecPoaEmergencyContact",
+                      "action": "showOrHideByPOA",
+                      "value": true
+                    },
+                    {
+                      "id": "ecFirstName",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ecMI",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ecLastName",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ecRelationWithApplicant",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ecPhone",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ],
+              "hidden": false,
+              "mandatory": false,
+              "width": 12,
+              "type": "CheckBox",
+              "mappedAttribute": "ecProvideAgreement"
+            },
+            {
+              "name": "Please use my POA as my Emergency Contact",
+              "id": "ecPoaEmergencyContact",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "ecLastName",
+                      "action": "populateByPoa"
+                    },
+                    {
+                      "id": "ecFirstName",
+                      "action": "populateByPoa"
+                    },
+                    {
+                      "id": "ecPhone",
+                      "action": "populateByPoa"
+                    },
+                    {
+                      "id": "ecRelationWithApplicant",
+                      "action": "populateByPoa"
+                    }
+                  ]
+                }
+              ],
+              "hidden": true,
+              "mandatory": false,
+              "width": 12,
+              "type": "CheckBox",
+              "mappedAttribute": "ecPoaEmergencyContact"
+            },
+            {
+              "name": "Last Name",
+              "id": "ecLastName",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "minlength": 2,
+              "type": "Text",
+              "populateFrom": "poaLastName",
+              "restriction": {
+                "value": "lettersAndSpace",
+                "restrict": true
+              },
+              "mappedAttribute": "ecLastName"
+            },
+            {
+              "name": "Middle Initial",
+              "id": "ecMI",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": false,
+              "width": 2,
+              "maxlength": 1,
+              "restriction": {
+                "value": "onlyLetters",
+                "restrict": true
+              },
+              "type": "Text",
+              "mappedAttribute": "ecMI",
+              "skipSummary": true
+            },
+            {
+              "name": "First Name",
+              "id": "ecFirstName",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "type": "Text",
+              "populateFrom": "poaFirstName",
+              "restriction": {
+                "value": "lettersAndSpace",
+                "restrict": true
+              },
+              "mappedAttribute": "ecFirstName",
+              "skipSummary": true
+            },
+            {
+              "name": "Relationship to applicant",
+              "id": "ecRelationWithApplicant",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "type": "Dropdown",
+              "populateFrom": "poaRelationWithApplicant",
+              "mappedAttribute": "ecRelationWithApplicant",
+              "source": [
+                {
+                  "key": "other",
+                  "name": "Other"
+                },
+                {
+                  "key": "spouse",
+                  "name": "Spouse"
+                },
+                {
+                  "key": "sibling",
+                  "name": "Sibling"
+                },
+                {
+                  "key": "parent",
+                  "name": "Parent"
+                },
+                {
+                  "key": "child",
+                  "name": "Child"
+                },
+                {
+                  "key": "agentBroker",
+                  "name": "Agent/Broker"
+                },
+                {
+                  "key": "friend",
+                  "name": "Friend"
+                },
+                {
+                  "key": "organization",
+                  "name": "Organization"
+                }
+              ]
+            },
+            {
+              "name": "Phone Number",
+              "id": "ecPhone",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "type": "Phone",
+              "restriction": "Phone",
+              "populateFrom": "poaPhoneNumber",
+              "mappedAttribute": "ecPhone"
+            }
+          ],
+          "hidden": false,
+          "summaryMask": true
+        }
+      ],
+      "fields": []
+    },
+    {
+      "name": "Preferences",
+      "id": "Preferences",
+      "title": "Preferences",
+      "index": 7,
+      "subsections": [
+        {
+          "name": "Preferred Language",
+          "id": "Preferred-Language",
+          "title": "Preferred Language",
+          "fields": [
+              {
+                "name": "Primary Language",
+                "id": "prefPrimaryLanguage",
+                "hidden": false,
+                "mandatory": true,
+                "width": 5,
+                "mappedAttribute": "PrimaryLanguage",
+                "type": "Dropdown",
+                "datasource": "PrimaryLanguage",
+                "defaultValue": "ENG",
+                "triggers": [
+                  {
+                    "name": "onChange",
+                    "actions": [
+                      {
+                        "id": "prefSecondaryLanguage",
+                        "action": "showOrHide",
+                        "value": "OTH"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Secondary Language",
+                "id": "prefSecondaryLanguage",
+                "hidden": true,
+                "mandatory": false,
+                "width": 5,
+                "placeholder": "----Select----",
+                "mappedAttribute": "SecondaryLanguage",
+                "type": "Dropdown",
+                "datasource": "SecondaryLanguage"
+              },
+              {
+              "name": "",
+              "id": "AlternateFormatDisclaimer",
+              "triggers": [],
+              "width": 12,
+              "contentQuery" : {
+                "addBrand": true,
+                "key":"AlternativeFormatDisclaimer",
+                "group":"FormIndividualPreferenceAlternativeFormat"
+              },
+              "type": "Disclaimer"
+            },
+            {
+              "name": "Alternative Format",
+              "id": "alternativeFormat",
+              "width": 5,
+              "mandatory": false,
+              "placeholder": "---Select Format---",
+              "mappedAttribute": "alternativeFormat",
+              "type": "Dropdown",
+              "datasource": "AlternateFormat"
+            },
+            {
+              "name": "",
+              "id": "prefLanguageDisclaimer",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "contentQuery" : {
+                "addBrand": true,
+                "key":"{{brandName}}Disclaimer",
+                "group":"FormIndividualPreferenceLenguage"
+              },
+              "type": "Disclaimer",
+              "disabled": false
+            }
+          ],
+          "hidden": false
+        },
+        {
+          "name": "Digital On-Board",
+          "id": "prefDigitalOnBoard",
+          "title": "Digital on-Boarding",
+          "fields": [
+            {
+              "name": "Would you like to learn more about receiving materials electronically?",
+              "id": "prefDigitalOnBoardingQuestion",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "prefCommunicationsQuestion",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "prefMaterialsDisclaimer",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ],
+              "hidden": false,
+              "mandatory": true,
+              "width": 3,
+              "mappedAttribute": "digitalOnboardingIndicator",
+              "type": "Radiogroup",
+              "disabled": false,
+              "source": "YES/NO"
+            },
+            {
+              "name": "",
+              "id": "prefMaterialsDisclaimer",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": false,
+              "width": 3,
+              "content": "Materials On-Line:<br>You have the option to receive most of your plan and coverage materials securely on-line instead of in paper format. This is a faster, easier method providing you the convenience to access your materials whenever you need them, while also significantly reducing the amount of mail you would receive from Humana. If you answer \"Yes\" to this option, you will receive an initial email with a link that will take you to the MyHumana registration page. Once you register, your digital well experience begins.<br>I choose to receive the following documents on-line:<br>&#8226;  Verification Letter<br>&#8226;  Member Guide<br>&#8226;  Plan Coverage Package<br>&#8226;  Evidence of Coverage<br>&#8226;  Summary of Benefits<br>&#8226;  Plan Rating<br>&#8226;  Value-added services<br>&#8226;  Provider Directory<br>&#8226;  Drug Guide<br>&#8226;  Health Risk Assessment<br>&#8226;  Health and Wellbeing Toolkit<br>&#8226;  Annual Notice of Change with Evidence of Coverage<br>&#8226;  Smart Summary\r\n",
+              "type": "Disclaimer",
+              "disabled": false
+            },
+            {
+              "name": "Would you like to receive these communications online?",
+              "id": "prefCommunicationsQuestion",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "prefMaterialsDisclaimer",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ],
+              "hidden": true,
+              "mandatory": "true",
+              "width": 3,
+              "mappedAttribute": "prefCommunicationsQuestion",
+              "customValidation": "checkRequiredField",
+              "fieldToCheck": "ciApplicantEmail",
+              "correctFieldToCheckComment": "Here is the mail address you provided: ",
+              "missingFieldToCheckError": "Email address cannot be blank, please enter an email address in the Demographics section",
+              "showCommentWhenValueEqualsTo": true,
+              "type": "Radiogroup",
+              "source": "YES/NO"
+            },
+            {
+              "name": "",
+              "id": "prefCommunicationsDisclaimer",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "content": "Note to agent: if asked, the member can elect to receive certain documents by changing their preferences online at MyHumana or by calling Customer Service.\r\n",
+              "mappedAttribute": "prefCommunicationsDisclaimer",
+              "type": "Disclaimer",
+              "disabled": false
+            }
+          ],
+          "hidden": false,
+          "triggersLasLoad": [
+            {
+              "name": "onlyForPlan",
+              "plan": "Humana"
+            }
+          ]
+        },
+        {
+          "name": "Communication",
+          "id": "prefContactMethod",
+          "title": "Communications method",
+          "fields": [
+            {
+              "name": "Preferred Method of Communication",
+              "id": "prefCommunicationMethod",
+              "customValidation": "preferredMethodCommunication",
+              "missingFieldToCheckError": "Phone number cannot be blank, please enter a phone number in the demographics section.",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": []
+                }
+              ],
+              "hidden": false,
+              "mandatory": true,
+              "width": 3,
+              "mappedAttribute": "prefCommunicationMethod",
+              "type": "Radiogroup",
+              "source": [
+                {
+                  "key": "Phone",
+                  "name": "Phone"
+                },
+                {
+                  "key": "Email",
+                  "name": "Email"
+                },
+                {
+                  "key": "Mail",
+                  "name": "USPS"
+                }
+              ]
+            },
+            {
+              "name": "",
+              "id": "prefFCCDisclaimer",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "type": "Disclaimer"
+            }
+          ],
+          "hidden": false
+        }
+      ],
+      "fields": []
+    },
+    {
+      "name": "PCP",
+      "id": "PCP",
+      "title": "PCP",
+      "index": 8,
+      "subsections": [],
+      "triggersLasLoad": [
+        {
+          "name": "hasPCPSection"
+        }
+      ],
+      "fields": [
+        {
+          "name": "pcpdisclaimer",
+          "id": "pcpdisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer",
+          "contentQuery": {
+            "addBrand":true,
+            "key": "Disclaimer",
+            "group": "PcpSection"
+          }
+        },
+        {
+          "id": "findAction2",
+          "name": "Search for my doctor",
+          "hideTitle": true,
+          "comment": "In connected mode you may use the physician finder tool to search for a PCP or a specialist",
+          "type": "PhysicianAction",
+          "width": "12",
+          "triggers": [],
+          "populateFields": {
+              "pcpIdNumber": "pcpNumber",
+              "pcpName": "pcpName"
+          }
+        },
+        {
+          "id": "pcpName",
+          "mappedAttribute": "PrimaryCarePhyscianName",
+          "name": "Name of Primary Care Physician (PCP)",
+          "mandatory": true,
+          "type": "TextArea",
+          "restriction": "lettersAndSpace",
+          "width": "5",
+          "maxlength": 30,
+          "triggers": []
+        },
+        {
+          "id": "pcpNumber",
+          "mappedAttribute": "PrimaryCarePhyscianNumber",
+          "name": "PCP ID Number",
+          "mandatory": true,
+          "type": "Text",
+          "restriction": "numbers",
+          "width": "5",
+          "minlength": 6,
+          "maxlength": 12,
+          "triggers": []
+        },
+        {
+          "id": "pcpEstablishedPatient",
+          "mappedAttribute": "PrimaryCarePhysicanCurrentPatientIndicator",
+          "name": "Are you an established patient of the physician you selected?",
+          "mandatory": true,
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "width": "3",
+          "triggers": []
+        }
+      ]
+    },
+    {
+      "name": "Additional Info",
+      "id": "additionalInfo",
+      "title": "Additional information",
+      "index": 9,
+      "subsections": [
+        {
+          "name": "Other Coverage",
+          "id": "otherCoverage",
+          "title": "Other Coverage",
+          "longTitle": "Other Coverage",
+          "fields": [
+            {
+              "id": "spouceWork",
+              "name": "Once enrolled, will you or your spouse work?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "spouceWork",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "spouceWork",
+                      "action": "checkCoverageQuestions"
+                    }
+                  ]
+                }
+              ],
+              "width": "3"
+            },
+            {
+              "id": "otherGroupCoverage",
+              "name": "Once enrolled, will you or your spouse have other group health coverage?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "otherGroupCoverage",
+              "mandatory": true,
+              "width": "3",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "carrierName",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierAddress",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierCity",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierState",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierZip",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierPhone",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierAddress2",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "carrierIdNumber",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "otherGroupCoverage",
+                      "action": "checkCoverageQuestions"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "carrierName",
+              "name": "Carrier Name",
+              "type": "Text",
+              "mappedAttribute": "carrierName",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 35,
+              "restriction": "letters",
+              "mandatory": true
+            },
+            {
+              "id": "carrierAddress",
+              "name": "Carrier Address 1",
+              "type": "Text",
+              "mappedAttribute": "carrierAddress",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 70,
+              "restriction": "alphanumerics",
+              "mandatory": "true"
+            },
+            {
+              "name": "Carrier Address 2",
+              "id": "carrierAddress2",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "mappedAttribute": "carrierAddress2",
+              "restriction": "alphanumerics",
+              "type": "Text",
+              "skipSummary": true
+            },
+            {
+              "id": "carrierCity",
+              "name": "City",
+              "type": "Text",
+              "mappedAttribute": "carrierCity",
+              "triggers": [],
+              "width": 5,
+              "restriction": "city",
+              "minlength": 2,
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "carrierState",
+              "name": "State",
+              "type": "Dropdown",
+              "mappedAttribute": "carrierState",
+              "datasource": "state",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "carrierZip",
+              "name": "Zip Code",
+              "type": "ZipCode",
+              "disableValidations": true,
+              "maxlength": 5,
+              "mappedAttribute": "carrierZip",
+              "restriction": "numbers",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": []
+                }
+              ],
+              "width": 3,
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "carrierPhone",
+              "name": "Carrier Phone Number",
+              "type": "Phone",
+              "restriction": "Phone",
+              "mappedAttribute": "carrierPhone",
+              "comment": "Example: 555-345-2134",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "carrierIdNumber",
+              "name": "Applicant ID Number",
+              "type": "Text",
+              "mappedAttribute": "carrierIdNumber",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "restriction": "numbers",
+              "mandatory": true
+            },
+            {
+              "id": "otherDrugCoverage",
+              "name": "Some people may have other drug coverage including private insurance, TRICARE, federal employee health benefits coverage, VA benefits, or State pharmaceutical assistance programs. Will you have other prescription drug coverage in addition to the plan for which you are applying?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "otherDrugCoverage",
+              "width": "3",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "odcName",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "otherDrugCoverage",
+                      "action": "checkCoverageQuestions"
+                    },
+                    {
+                      "id": "odcIdNumber",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "odcBenNumber",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "odcPcnNumber",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "odcName",
+              "name": "Name of other coverage",
+              "type": "Text",
+              "mappedAttribute": "odcName",
+              "triggers": [],
+              "width": "10",
+              "hidden": true,
+              "maxlength": 35,
+              "restriction": "letters",
+              "mandatory": true
+            },
+            {
+              "id": "odcPcnNumber",
+              "name": "Policy number",
+              "type": "Text",
+              "mappedAttribute": "odcPcnNumber",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 35,
+              "restriction": "numbers",
+              "mandatory": true
+            },
+            {
+              "id": "odcIdNumber",
+              "name": "Member ID number",
+              "type": "Text",
+              "mappedAttribute": "odcIdNumber",
+              "triggers": [],
+              "width": "5",
+              "hidden": true,
+              "maxlength": 35,
+              "restriction": "numbers",
+              "mandatory": true
+            },
+            {
+              "id": "groupHealthAware",
+              "name": "If you have employer, medical and/or prescription drug coverage, do you understand your existing coverage will end and be replaced by the coverage applied for today, once accepted by the Centers for Medicare and Medicaid Services?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "groupHealthAware",
+              "mandatory": true,
+              "width": "3",
+              "triggers": [],
+              "hidden": true
+            }
+          ],
+          "summaryMask": true
+        },
+        {
+          "name": "Medicaid",
+          "id": "medicaid",
+          "title": "Medicaid",
+          "longTitle": "Medicaid",
+          "fields": [
+            {
+              "id": "enrolledInMedicaid",
+              "name": "Are you enrolled in your state's Medicaid coverage?",
+              "type": "Radiogroup",
+              "mandatory": true,
+              "mappedAttribute": "MedicaidCoverageIndicator",
+              "source": "YES/NO",
+              "width": "3",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "medicaidNumber",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "medicaidEffectiveDate",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "medicaidNumber",
+              "name": "Applicant Medicaid Number",
+              "type": "Text",
+              "mappedAttribute": "MedicaidPolicyNumber",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 20,
+              "restriction": "alphanumerics",
+              "mandatory": true
+            },
+            {
+              "id": "medicaidEffectiveDate",
+              "name": "Effective Date",
+              "type": "Datepicker",
+              "mappedAttribute": "medicaidEffectiveDate",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "mandatory": true
+            }
+          ],
+          "summaryMask": true
+        },
+        {
+          "name": "LTC",
+          "id": "LTC",
+          "title": "Long-Term Care",
+          "longTitle": "Long term care",
+          "fields": [
+            {
+              "id": "ltcResident",
+              "name": "Are you currently a resident in a nursing home or long-term care facility?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "LongTermCareResidentIndicator",
+              "mandatory": true,
+              "width": "3",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "ltcName",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcDateEntered",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcAddress",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcAddress2",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcCity",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcState",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcZip",
+                      "action": "showOrHide",
+                      "value": true
+                    },
+                    {
+                      "id": "ltcPhone",
+                      "action": "showOrHide",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ltcDateEntered",
+              "name": "Admission Date",
+              "type": "Datepicker",
+              "mappedAttribute": "ltcDateEntered",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "ltcName",
+              "name": "Facility Name",
+              "type": "Text",
+              "mappedAttribute": "InstitutionName",
+              "triggers": [],
+              "width": "5",
+              "hidden": true,
+              "maxlength": 70,
+              "restriction": "letters",
+              "mandatory": true
+            },
+            {
+              "id": "ltcAddress",
+              "name": "Facility Address 1",
+              "type": "Text",
+              "mappedAttribute": "LongTermCareAddress1",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 70,
+              "restriction": "alphanumerics",
+              "mandatory": true
+            },
+            {
+              "id": "ltcAddress2",
+              "name": "Facility Address 2",
+              "type": "Text",
+              "mappedAttribute": "LongTermCareAddress2",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "maxlength": 70,
+              "restriction": "alphanumerics",
+              "mandatory": false,
+              "skipSummary": true
+            },
+            {
+              "id": "ltcCity",
+              "name": "City",
+              "type": "Text",
+              "mappedAttribute": "LongTermCareCity",
+              "triggers": [],
+              "width": 5,
+              "restriction": "city",
+              "minlength": 2,
+              "hidden": true,
+              "mandatory": true
+            },
+            {
+              "id": "ltcState",
+              "name": "State",
+              "type": "Dropdown",
+              "mappedAttribute": "LongTermCareState",
+              "datasource": "state",
+              "triggers": [],
+              "width": 5,
+              "hidden": true,
+              "mandatory": true,
+              "skipSummary": true
+            },
+            {
+              "id": "ltcZip",
+              "name": "Zip Code",
+              "type": "ZipCode",
+              "maxlength": 5,
+              "mappedAttribute": "LongTermCareZip",
+              "disableValidations": true,
+              "restriction": "numbers",
+              "triggers": [],
+              "width": 3,
+              "hidden": true,
+              "mandatory": true,
+              "skipSummary": true
+            },
+            {
+              "id": "ltcPhone",
+              "name": "Facility Phone Number",
+              "type": "Phone",
+              "restriction": "Phone",
+              "mappedAttribute": "LongTermCarePhone",
+              "comment": "Example: 555-345-2134",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "OSB",
+      "longName": "Optional Supplemental Benefits (OSB) questions",
+      "id": "OSB",
+      "title": "Optional Supplemental Benefits",
+      "index": 10,
+      "subsections": [],
+      "hidden": false,
+      "triggersLasLoad": [
+        {
+          "name": "hasOsbPlan"
+        }
+      ],
+      "fields": [
+        {
+          "name": "Are you interested in a supplemental benefit plan (Dental, Vision, etc.)?",
+          "id": "osbAgreementQuestion",
+          "triggersLasLoad": [
+                {
+                  "name": "hasOsbPlanSelected"
+                }
+          ],
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "osbDisplay",
+                  "action": "disable",
+                  "value": true
+                },
+                {
+                  "id": "osbAgreementQuestion",
+                  "action": "osbPlanHasChanged"
+                },
+                {
+                  "id": "osbDisplay",
+                  "action": "updateOsbPlansMandatory",
+                  "value": true
+                },
+                {
+                  "id": "osbAgreementQuestion",
+                  "action": "updateOsbQuestion"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": "5",
+          "type": "Radiogroup",
+          "source": "YES/NO",
+          "mappedAttribute": "osbAgreementQuestion",
+          "fromLaS": "osbQuestion",
+          "errorsOnValue": []
+        },
+        {
+          "id": "osbDisplay",
+          "type": "OsbSection",
+          "triggersLasLoad": [
+                {
+                  "name": "osbPlanHasLoad"
+                }
+          ],
+          "mappedAttribute": "osbDisplay",
+          "mandatory": false,
+          "width": "5",
+          "triggers": [],
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "id": "Payment",
+      "title": "Payment",
+      "longName": "Payment amount",
+      "index": 11,
+      "subsections": [],
+      "fields": [
+        {
+          "id": "PaymentOsbData",
+          "type": "PaymentOsbData",
+          "mappedAttribute": "PaymentOsbData",
+          "mandatory": false,
+          "width": "10",
+          "triggers": [],
+          "hidden": false,
+          "name": ""
+        },
+        {
+          "name": "paymentTopSectionDisclaimer",
+          "id": "paymentTopSectionDisclaimer",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}PaymentTopSection",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "<h4 class='ui-kit-h4 medium'>Payment Options</h4>",
+          "nameQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}PaymentTopSection",
+            "group": "PaymentDisclaimer"
+          },
+          "id": "PaymentOption",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "Payment",
+                  "action": "showPaymentFields"
+                },
+                {
+                  "id": "paymentDisclaimerSocial",
+                  "action": "showOrHide",
+                  "value": "SSAWithholding"
+                },
+                {
+                  "id": "paymentDisclaimerRailroad",
+                  "action": "showOrHide",
+                  "value": "RRBWithholding"
+                },
+                {
+                  "id": "paymentDisclaimerDirect",
+                  "action": "showOrHide",
+                  "value": "CouponBook"
+                },
+                {
+                  "id": "paymentDisclaimerCreditCard",
+                  "action": "showOrHide",
+                  "value": "CreditCard"
+                },
+                {
+                  "id": "paymentCreditCardData",
+                  "action": "showOrHide",
+                  "value": "CreditCard"
+                },
+                {
+                  "id": "paymentDisclaimerChecking",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                },
+                {
+                  "id": "paymentAccountType",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                },
+                {
+                  "id": "paymentBankName",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                },
+                {
+                  "id": "paymentRoutingNumber",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                },
+                {
+                  "id": "paymentAccountNumber",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                },
+                {
+                  "id": "routingImage",
+                  "action": "showOrHide",
+                  "value": "AutomaticBankWithdrawal"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 12,
+          "mappedAttribute": "PaymentOption",
+          "type": "Radiogroup",
+          "triggersLasLoad": [
+            {
+              "name": "getPaymentTypes"
+            }
+          ]
+        },
+        {
+          "name": "paymentDirectDisclaimer",
+          "id": "paymentDisclaimerDirect",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}CouponBook",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "paymentSocialDisclaimer",
+          "id": "paymentDisclaimerSocial",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}SSAWithholding",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "paymentCheckingDisclaimer",
+          "id": "paymentDisclaimerChecking",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}AutomaticBankWithdrawal",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "paymentCreditCardDisclaimer",
+          "id": "paymentDisclaimerCreditCard",
+          "contentQuery": {
+            "addBrand": false,
+            "key": "HumanaCreditCard",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "railroad disclaimer",
+          "id": "paymentDisclaimerRailroad",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}RRBWithholding",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "Account type",
+          "id": "paymentAccountType",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "paymentAccountType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "Checking",
+              "name": "Checking"
+            },
+            {
+              "key": "Savings",
+              "name": "Savings"
+            }
+          ]
+        },
+        {
+          "name": "Bank name",
+          "id": "paymentBankName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": "true",
+          "width": 5,
+          "mappedAttribute": "paymentBankName",
+          "type": "Text"
+        },
+        {
+          "name": "Routing number",
+          "id": "paymentRoutingNumber",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": "true",
+          "width": 5,
+          "mappedAttribute": "paymentRoutingNumber",
+          "type": "Text",
+          "maxlength": 9,
+          "restriction": "rtn"
+        },
+        {
+          "name": "Account number",
+          "id": "paymentAccountNumber",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": "true",
+          "width": 5,
+          "mappedAttribute": "paymentAccountNumber",
+          "type": "Text",
+          "maxlength": 17,
+          "restriction": "numbers"
+        },
+        {
+          "name": "",
+          "id": "routingImage",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "routingImage",
+          "type": "Image",
+          "imageSource": "app/assets/common/routing.png"
+        },
+        {
+          "type": "ComplexField",
+          "template": "credit-card",
+          "id": "paymentCreditCardData",
+          "mappedEntity": "creditCard",
+          "restriction": "creditCard",
+          "mandatory": true,
+          "subFields": [
+            {
+              "mappedEntity": "creditCard",
+              "parentId": "paymentCreditCardData",
+              "mandatory": false,
+              "id": "permanentPCIToken",
+              "label": "Card number <br><span class='comment'>(without dashes)</span>",
+              "width": 8,
+              "maxlength":16,
+              "type": "PermanentPCIToken",
+              "restriction": "permanentPCIToken",
+              "mappedAttribute": "permanentPCIToken",
+              "hidden": true
+            },
+            {
+              "mappedEntity": "creditCard",
+              "parentId": "paymentCreditCardData",
+              "mandatory": true,
+              "id": "expirationDate",
+              "label": "Expiration date <br><span class='comment'>(mm/yy)</span>",
+              "width": 4,
+              "type": "ExpirationDate",
+              "restriction": "creditCardExpiration",
+              "mappedAttribute": "expirationDate"
+            },
+            {
+              "mappedEntity": "creditCard",
+              "parentId": "paymentCreditCardData",
+              "id": "creditCardType",
+              "type": "CreditCardType",
+              "mappedAttribute": "creditCardType"
+            },
+            {
+              "mappedEntity": "creditCard",
+              "parentId": "paymentCreditCardData",
+              "mandatory": true,
+              "id": "creditCardNumber",
+              "label": "Card number <br><span class='comment'>(without dashes)</span>",
+              "width": 8,
+              "maxlength":19,
+              "type": "CreditCard",
+              "ifEmptyCheckFor": "permanentPCIToken",
+              "restriction": "creditCardNumber",
+              "mappedAttribute": "creditCardNumber"
+            }
+          ]
+        },
+        {
+          "name": "brandDisclaimer",
+          "id": "brandDisclaimer",
+          "contentQuery": {
+            "addBrand": true,
+            "key": "{{brandName}}PaymentBottomSection",
+            "group": "PaymentDisclaimer"
+          },
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer"
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Agent information",
+      "id": "Agent-Information",
+      "title": "Agent information",
+      "index": 12,
+      "subsections": [
+        {
+          "name": "Agent Data",
+          "id": "AgentData",
+          "title": "Licensed Sales Agent data",
+          "longTitle": "Agent Data",
+          "fields": [
+            {
+              "id": "agentName",
+              "name": "Licensed Sales Agent name",
+              "type": "Text",
+              "mappedAttribute": "AgentName",
+              "mandatory": true,
+              "triggers": [],
+              "width": "8",
+              "maxlength": 35,
+              "restriction": "letters",
+              "fromAgent": "agentName",
+              "disabled": true
+            },
+            {
+              "id": "agentLocation",
+              "name": "Location",
+              "type": "Text",
+              "mappedAttribute": "AgencyLocation",
+              "mandatory": true,
+              "width": "8",
+              "triggers": [],
+              "hidden": false,
+              "fromLaS": "State",
+              "disabled": true
+            },
+            {
+              "id": "agentSAN",
+              "name": "Licensed Sales Agent SAN",
+              "type": "Text",
+              "mappedAttribute": "AgentSAN",
+              "mandatory": true,
+              "disabled": true,
+              "triggers": [],
+              "width": "8",
+              "maxlength": 35,
+              "restriction": "numbers",
+              "fromAgent": "san"
+            },
+            {
+              "id": "agencyName",
+              "name": "Agency name",
+              "type": "Text",
+              "mappedAttribute": "agencyName",
+              "fromSOA":"agencyName",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "hidden": false,
+              "disabled": false,
+              "restriction": "alphanumerics"
+            },
+            {
+              "id": "agencySan",
+              "name": "Agency SAN",
+              "type": "Text",
+              "mappedAttribute": "agencySan",
+              "fromSOA":"agencySan",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "maxlength": 7,
+              "minlength":7,
+              "restriction": "numbers",
+              "disabled": false
+            },
+            {
+              "name": "MGA",
+              "id": "mga",
+              "type": "Text",
+              "mappedAttribute": "MgaCode",
+              "fromSOA":"MGACode",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "hidden": false,
+              "disabled": false,
+              "restriction": "alphanumerics",
+              "skipSummary": false
+            },
+            {
+              "name": "Licensed Sales Agent email address",
+              "id": "agentEmail",
+              "type": "Text",
+              "fromAgent": "email",
+              "mappedAttribute": "agentEmail",
+              "fromSOA":"agentEmail",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "hasToBeDifferent",
+                      "id": "ciApplicantEmail"
+                    }
+                  ]
+                }
+              ],
+              "width": "8",
+              "hidden": false,
+              "restriction": "email"
+            },
+            {
+              "name": "Affinity partner selection",
+              "id": "agentAffinityPartner",
+              "placeholder": "Please Select",
+              "type": "Dropdown",
+              "datasource":"affinityPartnerNames",
+              "mappedAttribute": "agentAffinityPartner",
+              "fromSOA":"agentAffinityPartner",
+              "mandatory": false,
+              "skipSummary": false,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "agentAffinityPartnerLocation",
+                      "action": "populatePartnerLocation"
+                    },
+                    {
+                      "id": "agentAffinityPartnerLocation",
+                      "action": "showOrHide",
+                      "value": "none"
+                    },
+                    {
+                      "id": "agentAffinityPartnerTID",
+                      "action": "populatePartnerTID"
+                    },
+                    {
+                      "id": "agentAffinityPartnerTID",
+                      "action": "showOrHide",
+                      "value": "none"
+                    },
+                    {
+                      "id": "fieldCampaignNone",
+                      "action": "showOrHideAffinityPartner",
+                      "value":false
+                    },
+                    {
+                      "id": "fieldCampaign",
+                      "action": "showOrHideAffinityPartner",
+                      "value":true
+                    },
+                    {
+                      "id": "fieldCampaign",
+                      "action": "populateCampaign"
+                    }
+                  ]
+                }
+              ],
+              "width": "8",
+              "hidden": false
+            },
+            {
+              "name": "Affinity Partner location",
+              "id": "agentAffinityPartnerLocation",
+              "type": "Dropdown",
+              "mappedAttribute": "agentAffinityPartnerLocation",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "disabled": true,
+              "hidden": true,
+              "skipSummary": false,
+              "fromSOA": "agentAffinityPartnerLocation"
+            },
+            {
+              "name": "Affinity Partner TID",
+              "id": "agentAffinityPartnerTID",
+              "type": "Text",
+              "mappedAttribute": "agentAffinityPartnerTID",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "disabled": true,
+              "hidden": true,
+              "skipSummary": false,
+              "value":"-"
+            }
+          ]
+        },
+        {
+          "name": "Sale Data",
+          "id": "SaleData",
+          "title": "Sale Data",
+          "longTitle": "Sale Data",
+          "skipSummary": false,
+          "fields": [
+            {
+              "id": "fieldCampaignNone",
+              "name": "Campaign Key Code",
+              "type": "Text",
+              "value": "0305046921",
+              "disabled": true,
+              "hidden": true,
+              "mappedAttribute": "KeyCode",
+              "mandatory": true,
+              "triggers": [],
+              "width": "8"
+            },
+            {
+              "id": "fieldCampaign",
+              "name": "Campaign Key Code",
+              "type": "Dropdown",
+              "source":"",
+              "disabled": false,
+              "hidden": true,
+              "mappedAttribute": "KeyCode",
+              "mandatory": true,
+              "triggers": [],
+              "width": "8"
+            },
+            {
+              "name": "GR number",
+              "id": "GRnumber",
+              "type": "Text",
+              "mappedAttribute": "GRnumber",
+              "mandatory": true,
+              "fromPlan": "customerNumber",
+              "triggers": [],
+              "width": "8",
+              "disabled": true,
+              "hidden": false
+            },
+            {
+              "name": "BN number",
+              "id": "BNnumber",
+              "type": "Text",
+              "mappedAttribute": "BNnumber",
+              "mandatory": true,
+              "fromPlan": "benSeqNo",
+              "triggers": [],
+              "width": "8",
+              "disabled": true,
+              "hidden": false
+            },
+            {
+              "name": "Veteran status",
+              "id": "VeteranStatus",
+              "mappedAttribute": "VeteranIndicator",
+              "mandatory": true,
+              "triggers": [],
+              "type": "Dropdown",
+              "source": [
+                {
+                  "key": "veteran",
+                  "name": "Veteran"
+                },
+                {
+                  "key": "veteran spouse",
+                  "name": "Veteran spouse"
+                },
+                {
+                  "key": "veteran referral",
+                  "name": "Veteran referral"
+                },
+                {
+                  "key": "none of the above",
+                  "name": "None of the above"
+                }
+              ],
+              "width": "8",
+              "hidden": false
+            },
+            {
+              "name": "Lead source (AKA \"source\")",
+              "id": "leadSource",
+              "type": "Dropdown",
+              "datasource": "source",
+              "mappedAttribute": "leadSource",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8"
+            },
+            {
+              "name": "Sub-source (for lead source)",
+              "id": "subSource",
+              "type": "TextArea",
+              "maxlength": 500,
+              "mappedAttribute": "subSource",
+              "mandatory": false,
+              "triggers": [],
+              "width": "8",
+              "disabled": false
+            },
+            {
+              "id": "agentSoaSource",
+              "name": "SOA Source",
+              "mandatory": true,
+              "type": "Radiogroup",
+              "mappedAttribute": "agentSoaSource",
+              "datasource":"SOASource",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "agentSoaId",
+                      "action": "showOrHideBySourceKey",
+                      "sourceKey": "additionalRequired"
+                    },
+                    {
+                      "id": "agentSoaId",
+                      "action": "switchSoaIdValidationsBySource"
+                    },
+                    {
+                      "action": "disableBySoa",
+                      "id": "agentSoaSource"
+                    }
+                  ]
+                }
+              ],
+              "fromSOA":"agentSoaSource",
+              "width": 12,
+              "hidden": false
+            },
+            {
+              "name": "SOA ID",
+              "id": "agentSoaId",
+              "triggers": [{
+                "name": "onChange",
+                "actions":[
+                  {
+                    "action": "disableBySoa",
+                    "id": "agentSoaId"
+                  }
+                ]
+              }],
+              "hidden": true,
+              "mandatory": true,
+              "maxlength": 20,
+              "width": 5,
+              "fromSOA":"agentSoaId",
+              "mappedAttribute": "agentSoaId",
+              "type": "Text"
+            },
+            {
+              "id": "productsDiscussed",
+              "name": "Products discussed",
+              "mandatory": true,
+              "type": "CheckBoxGroup",
+              "mappedAttribute": "productsDiscussed",
+              "datasource": "productsDiscussed",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "PDP",
+                      "setValue": "Medicare",
+                      "priority": 1
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "MA",
+                      "setValue": "Medicare",
+                      "priority": 1
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "MA/MAPD",
+                      "setValue": "Medicare",
+                      "priority": 1
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "MAPD",
+                      "setValue": "Medicare",
+                      "priority": 1
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "All",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "DP",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "VET",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "HIN",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "MES",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "OTH",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    },
+                    {
+                      "id": "businessSegment",
+                      "action": "modify",
+                      "onValue": "VP",
+                      "setValue": "TIPS",
+                      "priority": 2
+                    }
+                  ]
+                }
+              ],
+              "width": 3,
+              "hidden": false
+            },
+            {
+              "id": "businessSegment",
+              "nameQuery" : {
+                "addBrand": true,
+                "key":"Tier1",
+                "group":"SaleLocation"
+              },
+              "type": "Dropdown",
+              "mappedAttribute": "businessSegment",
+              "mandatory": true,
+              "datasource": "businessSegment",
+              "triggers": [],
+              "width": "8",
+              "hidden": false
+            },
+            {
+              "id": "marketingSource",
+              "nameQuery" : {
+                "addBrand": true,
+                "key":"Tier2",
+                "group":"SaleLocation"
+              },
+              "type": "Dropdown",
+              "mappedAttribute": "marketingSource",
+              "mandatory": true,
+              "datasource": "marketingSource",
+              "triggers": [],
+              "width": "8",
+              "hidden": false
+            },
+            {
+              "id": "saleLocation",
+              "nameQuery" : {
+                "addBrand": true,
+                "key":"Tier3",
+                "group":"SaleLocation"
+              },
+              "type": "Dropdown",
+              "mappedAttribute": "saleLocation",
+              "mandatory": true,
+              "datasource": "saleLocation",
+              "triggers": [],
+              "width": "8",
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Authorize & Sign",
+      "id": "signature",
+      "title": "Authorization & signature",
+      "index": 13,
+      "subsections": [
+        {
+            "name": "Signature Type",
+            "id": "subsectionSignatureType",
+            "title": "Select signature type",
+            "hidden": true,
+            "fields": [
+                {
+                    "id": "signatureType",
+                    "name": "Choose the preferred signature method for this enrollment",
+                    "type": "Radiogroup",
+                    "mappedAttribute": "SignatureType",
+                    "width": "3",
+                    "datasource" : "SignatureType",
+                    "mandatory": true,
+                    "hidden": true,
+                    "triggers": [
+                        {
+                          "name": "onChange",
+                          "actions": [
+                            {
+                              "id": "digitalSignature",
+                              "action": "showOrHide",
+                              "value": "DigitalSignature"
+                            },
+                            {
+                              "id": "electronicSignature",
+                              "action": "showOrHide",
+                              "value": "ElectronicSignature"
+                            }
+                          ]
+                        }
+                      ]
+                  }
+            ]
+        },
+        {
+          "name": "Digital Signature",
+          "id": "DigitalSignature",
+          "title": "Digital Signature",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "digSigDis",
+              "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}Disclaimer",
+                "group":"FormIndividualDigitalSignature"
+              },
+              "type": "Disclaimer",
+              "hidden": false,
+              "width": "5",
+              "triggers": []
+            },
+            {
+              "id": "digSigMultiDis",
+              "contentQuery" : {
+                  "addBrand":true,
+                  "key":"{{brandName}}MultiLanguageDisclaimer",
+                  "group":"FormIndividualDigitalSignature"
+              },
+              "type": "ImageDisclaimer",
+              "hidden": false,
+              "width": "5",
+              "triggers": []
+            },
+            {
+              "id": "signature_user",
+              "name": "Please inform the applicant of the following:<br>Signature of applicant or authorized legal representative (as indicated in the Decision maker section above)",
+              "type": "Signature",
+              "mappedAttribute": "signature_user",
+              "mandatory": true,
+              "alwaysMandatory": true,
+              "hidden": false,
+              "triggers": [],
+              "width": "5"
+            }
+          ]
+        },
+        {
+          "name": "Electronic Signature",
+          "id": "electronicSignature",
+          "title": "Electronic Signature",
+          "hidden": true,
+          "fields": [
+            {
+              "id": "fieldEmaileSig",
+              "name": "Email address",
+              "type": "Text",
+              "mappedAttribute": "Email",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "mandatory": true,
+              "reset": false,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "hasToBeEquals",
+                      "id": "fieldEmaileSigRe",
+                      "errorsOn": "fieldEmaileSigRe"
+                    }
+                  ]
+                }
+              ],
+              "width": "8",
+              "maxlength": 255,
+              "restriction": "email"
+            },
+            {
+              "id": "fieldEmaileSigRe",
+              "name": "Confirm email address",
+              "type": "Text",
+              "mappedAttribute": "eSigEmailRe",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "hasToBeEquals",
+                      "id": "fieldEmaileSig",
+                      "errorsOn": "fieldEmaileSigRe"
+                    }
+                  ]
+                }
+              ],
+              "width": "8",
+              "maxlength": 255,
+              "restriction": "email"
+            },
+            {
+              "id": "fieldSignatureDate",
+              "name": "Signature Date",
+              "type": "Text",
+              "mappedAttribute": "SignatureDate",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "triggers": [],
+              "width": "5",
+              "maxlength": 100,
+              "hidden": true
+            },
+            {
+              "id": "fieldSignatureTypeId",
+              "name": "Signature Type Id",
+              "type": "Text",
+              "mappedAttribute": "SignatureTypeId",
+              "triggers": [],
+              "width": "5",
+              "maxlength": 100,
+              "hidden": true
+            }
+          ]
+        }
+      ],
+      "fields": []
+    }
+  ]
+}

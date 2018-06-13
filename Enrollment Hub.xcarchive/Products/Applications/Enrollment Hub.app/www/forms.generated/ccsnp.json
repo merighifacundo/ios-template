@@ -1,0 +1,380 @@
+{
+  "name": "ccsnp",
+  "id": "ccsnp",
+  "mappedEntity": "",
+  "navType": "",
+  "sections": [
+    {
+      "name": "Qualification Questions",
+      "id": "sectionChronicDiseases",
+      "title": "Plan Specific",
+      "index": 0,
+      "hidden": false,
+      "subsections": [
+        {
+          "title": "Chronic diseases",
+          "id": "subsectionOfChronicDiseases",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "fieldPreliminQualifyingQuestion",
+              "name": "",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mappedAttribute": "preliminQualifyingQuestion",
+              "mandatory": false,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "CHQualifyingSubsection",
+                      "action": "showOrHide",
+                      "value": true,
+                      "ccsnp": "CH"
+                    },
+                    {
+                      "id": "KDQualifyingSubsection",
+                      "action": "showOrHide",
+                      "value": true,
+                      "ccsnp": "KD"
+                    },
+                    {
+                      "id": "CDQualifyingSubsection",
+                      "action": "showOrHide",
+                      "value": true,
+                      "ccsnp": "CD"
+                    },
+                    {
+                      "id": "CLQualifyingSubsection",
+                      "action": "showOrHide",
+                      "value": true,
+                      "ccsnp": "CL"
+                    },
+                    {
+                      "id": "DBQualifyingSubsection",
+                      "action": "showOrHide",
+                      "value": true,
+                      "ccsnp": "DB"
+                    }
+                  ]
+                },
+                {
+                  "name": "ShowPopUp",
+                  "actions": [
+                    {
+                      "id": "PopUpId",
+                      "action": "DisplayPopUp"
+                    }
+                  ]
+                }
+              ],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "title": "Clinical Qualifying Questions",
+          "id": "CHQualifyingSubsection",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "CHFirstQuestion",
+              "mappedAttribute": "CHFirstQuestion",
+              "name": "Do you have a problem with your heart, had a heart attack, or have you been told that you had a heart attack?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CHSecondQuestion",
+              "mappedAttribute": "CHSecondQuestion",
+              "name": "Do you have a problem with your circulation or have you been told that you have problems with your circulation?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CHThirdQuestion",
+              "mappedAttribute": "CHThirdQuestion",
+              "name": "Do you have pain in your legs when you walk that gets better when you stop and rest?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CHFourthQuestion",
+              "mappedAttribute": "CHFourthQuestion",
+              "name": "Have you ever been told you have heart failure or congestive heart failure?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CHFifthQuestion",
+              "mappedAttribute": "CHFifthQuestion",
+              "name": "Have you ever been told you have fluid in your lungs?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": true
+            },
+            {
+              "id": "CHSixthQuestion",
+              "mappedAttribute": "CHSixthQuestion",
+              "name": "Have you ever been told you have swelling in your legs due to your heart?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "title": "Clinical Qualifying Questions",
+          "id": "KDQualifyingSubsection",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "KDFirstQuestion",
+              "mappedAttribute": "KDFirstQuestion",
+              "name": "Have you ever been told that you have end-stage renal disease (ESRD)?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "KDSecondQuestion",
+              "mappedAttribute": "KDSecondQuestion",
+              "name": "Are you currently undergoing dialysis (hemodialysis or peritoneal dialysis)?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "KDThirdQuestion",
+              "mappedAttribute": "KDThirdQuestion",
+              "name": "Are you currently awaiting a kidney transplant?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "title": "Clinical Qualifying Questions",
+          "id": "CDQualifyingSubsection",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "CDFirstQuestion",
+              "mappedAttribute": "CDFirstQuestion",
+              "name": "Have you ever been told that you have high blood sugar or diabetes?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDSecondQuestion",
+              "mappedAttribute": "CDSecondQuestion",
+              "name": "Have you ever or do you currently measure/monitor your blood sugar?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDThirdQuestion",
+              "mappedAttribute": "CDThirdQuestion",
+              "name": "Have you been prescribed or are you taking insulin or an oral medication that is supposed to lower the sugar in your blood?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": true
+            },
+            {
+              "id": "CDFourthQuestion",
+              "mappedAttribute": "CDFourthQuestion",
+              "name": "Do you have a problem with your heart, had a heart attack, or have you been told that you had a heart attack?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDFifthQuestion",
+              "mappedAttribute": "CDFifthQuestion",
+              "name": "Do you have a problem with your circulation or have you been told that you have problems with your circulation?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDSixthQuestion",
+              "mappedAttribute": "CDSixthQuestion",
+              "name": "Do you have pain in your legs when you walk that gets better when you stop and rest?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDSeventhQuestion",
+              "mappedAttribute": "CDSeventhQuestion",
+              "name": "Have you ever been told you have heart failure or congestive heart failure?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDEigthQuestion",
+              "mappedAttribute": "CDEigthQuestion",
+              "name": "Have you ever been told you have fluid in your lungs?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CDNinethQuestion",
+              "mappedAttribute": "CDNinethQuestion",
+              "name": "Have you ever been told you have swelling in your legs due to your heart?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "title": "Clinical Qualifying Questions",
+          "id": "CLQualifyingSubsection",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "CLFirstQuestion",
+              "mappedAttribute": "CLFirstQuestion",
+              "name": "Do you have any chronic breathing problems?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CLSecondQuestion",
+              "mappedAttribute": "CLSecondQuestion",
+              "name": "Have you ever been told you have a lung problem such as COPD, emphysema, asthma, chronic bronchitis, scarring in the lung, or high pressure in the lungs?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "CLThirdQuestion",
+              "mappedAttribute": "CLThirdQuestion",
+              "name": "Do you use inhalers or other medicines for your breathing more than 3 times per week?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        },
+        {
+          "title": "Clinical Qualifying Questions",
+          "id": "DBQualifyingSubsection",
+          "hidden": false,
+          "fields": [
+            {
+              "id": "DBFirstQuestion",
+              "mappedAttribute": "DBFirstQuestion",
+              "name": "Have you ever been told that you have high blood sugar or diabetes?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "DBSecondQuestion",
+              "mappedAttribute": "DBSecondQuestion",
+              "name": "Have you ever or do you currently measure/monitor your blood sugar?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            },
+            {
+              "id": "DBThirdQuestion",
+              "mappedAttribute": "DBThirdQuestion",
+              "name": "Have you been prescribed or are you taking insulin or an oral medication that is supposed to lower the sugar in your blood?",
+              "type": "Radiogroup",
+              "source": "YES/NO",
+              "mandatory": false,
+              "triggers": [],
+              "width": "6",
+              "hidden": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typeName": "Qualifying Questions"
+}

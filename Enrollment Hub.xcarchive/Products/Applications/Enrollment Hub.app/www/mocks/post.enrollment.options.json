@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Protected Health Information (PHI) Consent Form",
+        "contentQuery" : {
+            "addBrand":true,
+            "key":"{{brandName}}PHIDescription",
+            "group":"PostEnrollmentConsent"
+        },
+        "question": "Does the applicant want to complete a PHI Consent Form today?",
+        "prefix": "PHI",
+        "suffix": {
+            "CarePlus": "CARE",
+            "Humana": "HUM"
+        },
+        "type": "Radiogroup",
+        "source": "YES/NO",
+        "width": 4
+    },
+    {
+        "title": "Humana Pharmacy (HP) Consent Form",
+        "contentQuery" : {
+            "addBrand":false,
+            "key":"HumanaHPDescription",
+            "group":"PostEnrollmentConsent"
+        },
+        "question": "Does the applicant want to complete an HP Consent form today?",
+        "id": "HPHUM",
+        "type": "Radiogroup",
+        "source": "YES/NO/BOOKLET",
+        "width": 4
+    },
+    {
+        "title": "Member Authorization (MAF) Form",
+        "contentQuery" : {
+            "addBrand":true,
+            "key":"{{brandName}}MAFDescription",
+            "group":"PostEnrollmentConsent"
+        },
+        "question": "Does the applicant want to complete the MAF Consent form today?",
+        "prefix": "MAF",
+        "suffix": {
+            "CarePlus": "CARE",
+            "Humana": "HUM"
+        },
+        "type": "Radiogroup",
+        "source": "YES/NO",
+        "width": 4
+    }
+]

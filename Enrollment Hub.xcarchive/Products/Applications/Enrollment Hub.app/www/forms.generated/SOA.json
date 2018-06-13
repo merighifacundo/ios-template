@@ -1,0 +1,875 @@
+{
+  "name": "SOA",
+  "id": "SOA",
+  "mappedEntity": "SOA",
+  "applicationType":"IND",
+  "helper": "SOAFormHelper",
+  "sections": [
+    {
+      "name": "Required Disclosures",
+      "id": "Preliminary-info",
+      "title": "Preliminary information",
+      "index": 0,
+      "subsections": [],
+      "fields": [
+        {
+          "id": "preliminaryDisclaimer0",
+          "contentQuery": {
+            "key": "RequiredDisclosures",
+            "group": "SoaForm"
+          },
+          "hidden": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "id": "preliminaryDisclaimer1",
+          "contentQuery": {
+            "key": "RequiredDisclosures1",
+            "group": "SoaForm"
+          },
+          "hidden": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "id": "preliminaryDisclaimer2",
+          "contentQuery": {
+            "key": "RequiredDisclosures2",
+            "group": "SoaForm"
+          },
+          "hidden": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+          "id": "preliminaryDisclaimer3",
+          "contentQuery": {
+            "key": "RequiredDisclosures3",
+            "group": "SoaForm"
+          },
+          "hidden": false,
+          "width": 12,
+          "type": "Disclaimer"
+        },
+        {
+            "id": "preliminaryDisclaimer4",
+            "contentQuery": {
+              "key": "RequiredDisclosures4",
+              "group": "SoaForm"
+            },
+            "hidden": false,
+            "width": 12,
+            "type": "Disclaimer"
+          }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Scope of Appointment",
+      "id": "Scope-of-appointment",
+      "title": "Scope of Appointment",
+      "longName": "Plans to discuss",
+      "index": 1,
+      "subsections": [
+        {
+          "name": "Plans to Discuss",
+          "id": "plansToDiscuss",
+          "title": "Plans to Discuss",
+          "fields": [
+            {
+              "id": "soaProductType",
+              "name": "Please indicate the type of health product(s) you want the agent to discuss:",
+              "mandatory": true,
+              "type": "CheckBoxGroup",
+              "hasFieldsDescription": true,
+              "mappedAttribute": "soaProductType",
+              "source": [
+                {
+                  "key": "MA/MAPD",
+                  "mandatory": true,
+                  "name": "Medicare Advantage Plans (Part C)",
+                  "description": "A Medicare Advantage Plan that provides all Original Medicare Part A and Part B health coverage and sometimes offers Part D prescription drug coverage and other additional benefits.<br><b>Medicare Health Maintenance Organization (HMO) </b><br> A Medicare Advantage Plan that typically requires you to see only in-network providers and get referrals from a primary care doctor.<br><b>Medicare Preferred Provider Organization (PPO) Plan </b><br> A Medicare Advantage Plan where in most cases you pay less if you use in-network doctors, and referrals from a primary care doctor are not required.<br><b>Medicare Private Fee-For-Service (PFFS) Plan </b><br> A Medicare Advantage Plan in which you may go to any Medicare-approved doctor, hospital and provider that accepts the plan’s payment, terms and conditions and agrees to treat you – not all providers will.<br><b>Medicare Special Needs Plan (SNP) </b><br> A Medicare Advantage Plan that has a benefit package designed for people with special health care needs. Examples of groups served include people with both Medicare and Medicaid, reside in nursing homes and have certain chronic medical conditions."
+                },
+                {
+                  "key": "PDP",
+                  "mandatory": true,
+                  "name": "Stand-alone Medicare Prescription Drug Plans (Part D)",
+                  "description": "Medicare Prescription Drug Plan (PDP) — A standalone drug plan that adds prescription drug coverage to Original Medicare."
+                },
+                {
+                  "key": "MES",
+                  "name": "Medicare Supplement",
+                  "disabled": true,
+                  "description": "Medicare Supplement are standardized plans that can be bought with varying coverage options. Medicare Supplement plans have no provider networks and cover some costs that Original Medicare does not pay."
+                },
+                {
+                  "key": "HIN",
+                  "name": "Hospital Indemnity",
+                  "description": "Hospital indemnity plans cover some of the costs associated with hospital stays that may not be covered by a primary health plan.",
+                  "disabled": true
+                },
+                {
+                  "key": "DP",
+                  "name": "Dental",
+                  "disabled": true,
+                  "description": "Dental plans are available at varying levels of coverage at in-network and out-of-network providers."
+                },
+                {
+                  "key": "VP",
+                  "name": "Vision",
+                  "disabled": true,
+                  "description": "Vision plans are available at varying levels of coverage at in-network and out-of-network providers."
+                },
+                {
+                  "key": "OTH",
+                  "name": "Other Health Products",
+                  "disabled": true
+                }
+              ],
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "soaProductType",
+                      "action": "enableHealthProducts"
+                    },
+                    {
+                      "id": "soaOtherHealthProducts",
+                      "action": "showOrHide",
+                      "onValue": "OTH",
+                      "value": true,
+                      "priority": 1
+                    }
+                  ]
+                }
+              ],
+              "width": 12,
+              "hidden": false
+            },
+            {
+              "name": "",
+              "id": "soaOtherHealthProducts",
+              "triggers": [],
+              "hidden": true,
+              "mandatory": true,
+              "width": 5,
+              "mappedAttribute": "soaOtherHealthProducts",
+              "type": "Text"
+            }
+          ],
+          "hidden": false
+        },
+        {
+          "name": "Appointment",
+          "id": "soaAppointment",
+          "title": "Appointment Date and Time",
+          "fields": [
+            {
+              "name": "Date of the appointment",
+              "id": "soaDate",
+              "hidden": false,
+              "mandatory": "true",
+              "width": 5,
+              "mappedAttribute": "soaDate",
+              "customValidation":"validateSoaTime",
+              "type": "Datepicker",
+              "minDate":"today"
+            },
+            {
+              "name": "Time of the appointment",
+              "id": "soaTime",
+              "hidden": false,
+              "mandatory": "true",
+              "width": 5,
+              "mappedAttribute": "soaTime",
+              "customValidation":"validateSoaTime",
+              "type": "Timepicker"
+            }
+          ],
+          "hidden": false
+        }
+      ],
+      "fields": [],
+      "hidden": false
+    },
+    {
+      "name": "Beneficiary Information",
+      "id": "Beneficiary",
+      "title": "Beneficiary Information",
+      "longName": "Beneficiary Information",
+      "index": 2,
+      "summaryMask": true,
+      "subsections": [
+        {
+          "name": "Beneficiary Data",
+          "id": "soaBeneficiaryData",
+          "title": "Beneficiary Data",
+          "fields": [
+            {
+              "name": "Beneficiary First Name",
+              "id": "beneficiaryFirstName",
+              "hidden": false,
+              "mandatory": true,
+              "width": 5,
+              "maxlength": 20,
+              "restriction": {
+                "value": "lettersAndSpace",
+                "restrict": true
+              },
+              "mappedAttribute": "beneficiaryName",
+              "type": "Text",
+              "skipSummary": true,
+              "populateFromCopiedData":"firstName"
+            },
+            {
+              "name": "Beneficiary Middle Initial",
+              "id": "beneficiaryMiddleName",
+              "hidden": false,
+              "mandatory": false,
+              "width": 2,
+              "maxlength": 1,
+              "restriction": {
+                "value": "onlyLetters",
+                "restrict": true
+              },
+              "mappedAttribute": "beneficiaryMiddleName",
+              "type": "Text",
+              "skipSummary": true,
+              "populateFromCopiedData":"middleInitial"
+            },
+            {
+              "name": "Beneficiary Last Name",
+              "id": "beneficiaryLastName",
+              "hidden": false,
+              "mandatory": true,
+              "maxlength": 35,
+              "width": 5,
+              "restriction": {
+                "value": "lettersAndSpace",
+                "restrict": true
+              },
+              "minlength": 2,
+              "mappedAttribute": "beneficiaryLastName",
+              "type": "Text",
+              "populateFromCopiedData":"lastName"
+            },
+            {
+              "name": "Beneficiary Phone Number",
+              "id": "beneficiaryPhone",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "type": "Phone",
+              "restriction": "Phone",
+              "comment": "Example: 555-345-2134",
+              "mappedAttribute": "beneficiaryPhone",
+              "populateFromCopiedData":"ciApplicantPhone"
+            },
+            {
+              "name": "Beneficiary Address Line 1",
+              "id": "beneficiaryAddress1",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "mappedAttribute": "beneficiaryAddress1",
+              "type": "Text",
+              "maxlength": 70,
+              "restriction": "address",
+              "populateFromCopiedData":"raStreet1"
+            },
+            {
+              "name": "Beneficiary Address Line 2",
+              "id": "beneficiaryAddress2",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "mappedAttribute": "beneficiaryAddress2",
+              "type": "Text",
+              "maxlength": 70,
+              "restriction": "address",
+              "skipSummary": true,
+              "populateFromCopiedData":"raStreet2"
+            },
+            {
+              "name": "Beneficiary City",
+              "id": "beneficiaryCity",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "mappedAttribute": "beneficiaryCity",
+              "type": "Text",
+              "restriction": "city",
+              "minlength": 2,
+              "skipSummary": true,
+              "populateFromCopiedData":"raCity"
+            },
+            {
+              "name": "Beneficiary State",
+              "id": "beneficiaryState",
+              "mappedAttribute": "beneficiaryState",
+              "triggers": [],
+              "type": "Dropdown",
+              "datasource": "state",
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "skipSummary": true,
+              "populateFromCopiedData":"state"
+            },
+            {
+              "name": "Beneficiary ZIP code",
+              "id": "beneficiaryZipCode",
+              "disableValidations": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "setAppointmentTimezone",
+                      "id": "soaTime"
+                    }
+                  ]
+                }
+              ],
+              "hidden": false,
+              "mandatory": false,
+              "width": 3,
+              "mappedAttribute": "beneficiaryZipCode",
+              "type": "ZipCode",
+              "fromLaS": "Zip",
+              "skipSummary": true,
+              "populateFromCopiedData":"zip"
+            },
+            {
+              "name": "Beneficiary Medicare Number:",
+              "id": "beneficiaryMedicareNumber",
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "type": "MedicareNumber",
+              "restriction": "MedicareNumber",
+              "maxlength": "10",
+              "mappedAttribute": "beneficiaryMedicareNumber",
+              "populateFromCopiedData":"medicareId"
+            }
+          ],
+          "hidden": false
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Agent Information",
+      "id": "Agent-Info",
+      "title": "Agent information",
+      "longName": "Agent information",
+      "index": 3,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "Agent name",
+          "id": "agentName",
+          "triggers": [],
+          "fromAgent": "agentName",
+          "hidden": false,
+          "mandatory": "true",
+          "width": 5,
+          "mappedAttribute": "agentName",
+          "type": "Text",
+          "disabled": true
+        },
+        {
+          "name": "Agent phone",
+          "id": "agentPhone",
+          "triggers": [],
+          "fromAgent": "phone",
+          "hidden": false,
+          "mandatory": true,
+          "mappedAttribute": "agentPhone",
+          "type": "Phone",
+          "restriction": "Phone"
+        },
+        {
+          "name": "Agent SAN",
+          "id": "agentSan",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "fromAgent": "san",
+          "mappedAttribute": "agentSan",
+          "type": "Text",
+          "disabled": true
+        },
+        {
+          "id": "initialContactMethod",
+          "name": "Initial method of contact",
+          "mandatory": true,
+          "type": "Radiogroup",
+          "mappedAttribute": "initialContactMethod",
+          "datasource":"SOAContactMethod",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "contactMethodOther",
+                  "action": "showOrHide",
+                  "value": "Other"
+                }
+              ]
+            }
+          ],
+          "width": 12,
+          "hidden": false
+        },
+        {
+          "name": "",
+          "id": "contactMethodOther",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "contactMethodOther",
+          "type": "TextArea",
+          "maxlength": 200
+        },
+        {
+          "name": "Plan(s) the Agent represented:",
+          "id": "agentPlans",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "agentPlans",
+          "type": "TextArea",
+          "maxlength": 200,
+          "restriction": "alphanumerics"
+        },
+        {
+          "name": "Application # - Paper Barcode,  MAPA ID or Recording ID:",
+          "id": "agentApplicationId",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": "true",
+          "width": 5,
+          "mappedAttribute": "agentApplicationId",
+          "type": "Text"
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Authorize and Sign",
+      "id": "signature",
+      "title": "Authorization & signature",
+      "longName": "Beneficiary signature",
+      "index": 4,
+      "subsections": [
+            {
+              "name": "Signature Type",
+              "id": "subsectionSignatureType",
+              "title": "Select signature type",
+              "hidden": true,
+                  "fields": [
+                    {
+                        "name": "",
+                        "id": "disVerbiage",
+                        "content": "*Please inform the applicant of the following: Your coverage will begin on the first day of the next month as long as Humana has your completed and signed enrollment form no later than the last day of this month. If Humana receives your completed enrollment form after the last day of this month, your coverage will not begin until the first day of the following month.",
+                        "hidden": false,
+                        "mandatory": false,
+                        "type": "Disclaimer"
+                    },
+                    {
+                      "id": "incompleteNotice",
+                      "content": "All required information must be completed before you can select a signature method.",
+                      "type": "Disclaimer",
+                      "mandatory": false,
+                      "hidden": false,
+                      "width": "5",
+                      "triggers": []
+                    },
+                    {
+                      "id": "signatureType",
+                      "name": "Choose the preferred signature method for this enrollment",
+                      "type": "Radiogroup",
+                      "mappedAttribute": "signatureType",
+                      "width": "3",
+                      "datasource": "SignatureType",
+                      "hidden": true,
+                      "triggers": []
+                    }
+                  ]
+            },
+            {
+              "name": "Signatory type",
+              "id": "Signatory type",
+              "title": "Signatory type",
+              "hidden": false,
+              "fields": [
+                {
+                  "name": "Signatory type",
+                  "id": "beneficiarySigType",
+                  "source": [
+                    {
+                      "key": "self",
+                      "name": "Self"
+                    },
+                    {
+                      "key": "poa",
+                      "name": "POA or other authorized legal representative"
+                    }
+                  ],
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "id": "poaSubsection",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaFirstNameSOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaLastNameSOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaAddress1SOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaAddress2SOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaCitySOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaStateSOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaZipSOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaPhoneNumberSOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        },
+                        {
+                          "id": "poaRelationWithBeneficiarySOA",
+                          "action": "showOrHide",
+                          "value": "poa"
+                        }
+                      ]
+                    }
+                  ],
+                  "hidden": false,
+                  "mandatory": true,
+                  "width": 6,
+                  "type": "Radiogroup",
+                  "mappedAttribute": "beneficiarySignatoryType"
+                }
+              ],
+              "sections": []
+            },
+            {
+              "name": "POA Information",
+              "id": "poaSubsection",
+              "title": "Power of Attorney Signatory information",
+              "fields": [
+                {
+                  "id": "poaFirstNameSOA",
+                  "name": "POA First name",
+                  "type": "Text",
+                  "mappedAttribute": "poaFirstNameSOA",
+                  "mandatory": true,
+                  "triggers": [],
+                  "width": 5,
+                  "maxlength": 35,
+                  "restriction": "letters",
+                  "hidden": true
+                },
+                {
+                  "id": "poaLastNameSOA",
+                  "name": "POA Last name",
+                  "type": "Text",
+                  "mappedAttribute": "poaLastNameSOA",
+                  "mandatory": true,
+                  "triggers": [],
+                  "width": "5",
+                  "minlength": 2,
+                  "maxlength": 35,
+                  "restriction": "letters",
+                  "hidden": true,
+                  "skipSummary": true
+                },
+                {
+                  "id": "poaPhoneNumberSOA",
+                  "name": "POA Phone number",
+                  "type": "Phone",
+                  "restriction": "Phone",
+                  "mappedAttribute": "poaPhoneNumberSOA",
+                  "mandatory": true,
+                  "comment": "Example: 555 345 2134",
+                  "triggers": [],
+                  "hidden": true
+                },
+                {
+                  "id": "poaAddress1SOA",
+                  "name": "POA Address",
+                  "type": "Text",
+                  "mappedAttribute": "poaAddress1SOA",
+                  "mandatory": true,
+                  "triggers": [],
+                  "width": "5",
+                  "hidden": true,
+                  "maxlength": 70,
+                  "restriction": "address"
+                },
+                {
+                  "id": "poaCitySOA",
+                  "name": "POA City",
+                  "type": "Text",
+                  "mappedAttribute": "poaCitySOA",
+                  "restriction": "city",
+                  "minlength": 2,
+                  "mandatory": true,
+                  "triggers": [],
+                  "width": 5,
+                  "hidden": true
+                },
+                {
+                  "id": "poaStateSOA",
+                  "name": "POA State",
+                  "type": "Dropdown",
+                  "mappedAttribute": "poaStateSOA",
+                  "mandatory": true,
+                  "datasource": "state",
+                  "triggers": [],
+                  "width": 5,
+                  "hidden": true
+                },
+                {
+                  "id": "poaZipSOA",
+                  "name": "POA ZIP code",
+                  "type": "ZipCode",
+                  "maxlength": 5,
+                  "mappedAttribute": "poaZipSOA",
+                  "mandatory": true,
+                  "restriction": "numbers",
+                  "triggers": [],
+                  "disableValidations": true,
+                  "width": 3,
+                  "hidden": true
+                },
+                {
+                  "id": "poaRelationWithBeneficiarySOA",
+                  "name": "POA Relationship",
+                  "type": "Dropdown",
+                  "mappedAttribute": "poaRelationWithBeneficiarySOA",
+                  "mandatory": true,
+                  "triggers": [],
+                  "width": "5",
+                  "maxlength": 255,
+                  "hidden": true,
+                  "source": [
+                    {
+                      "key": "other",
+                      "name": "Other"
+                    },
+                    {
+                      "key": "spouse",
+                      "name": "Spouse"
+                    },
+                    {
+                      "key": "sibling",
+                      "name": "Sibling"
+                    },
+                    {
+                      "key": "parent",
+                      "name": "Parent"
+                    },
+                    {
+                      "key": "child",
+                      "name": "Child"
+                    },
+                    {
+                      "key": "agentBroker",
+                      "name": "Agent/Broker"
+                    },
+                    {
+                      "key": "friend",
+                      "name": "Friend"
+                    },
+                    {
+                      "key": "organization",
+                      "name": "Organization"
+                    }
+                  ]
+                }
+              ],
+              "hidden": true
+            },
+            {
+              "name": "Digital Signature",
+              "id": "DigitalSignature",
+              "title": "Digital Signature",
+              "hidden": false,
+              "fields": [
+                {
+                  "id": "digSigDis",
+                  "contentQuery": {
+                    "key": "DigitalSignature",
+                    "group": "SoaForm"
+                  },
+                  "type": "Disclaimer",
+                  "hidden": false,
+                  "width": "12"
+                },
+                {
+                    "id": "digSigDis1",
+                    "contentQuery": {
+                      "key": "DigitalSignature1",
+                      "group": "SoaForm"
+                    },
+                    "type": "Disclaimer",
+                    "hidden": false,
+                    "width": "12"
+                  },
+                {
+                  "id": "signature_user",
+                  "type": "Signature",
+                  "mappedAttribute": "signature_user",
+                  "mandatory": true,
+                  "alwaysMandatory": true,
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "id": "signature_user",
+                          "action": "verifySignatureDatetime"
+                        }
+                      ]
+                    }
+                  ],
+                  "width": "5"
+                },
+                {
+                  "name": "If the form was signed by the beneficiary at time of appointment, provide explanation why SOA was not documented prior to meeting",
+                  "id": "digitalSignatureExplanation",
+                  "triggers": [],
+                  "hidden": true,
+                  "mandatory": "true",
+                  "width": 6,
+                  "mappedAttribute": "digitalSignatureExplanation",
+                  "type": "Text",
+                  "minlength": 50
+                }
+              ]
+            },
+            {
+              "name": "Electronic Signature",
+              "id": "electronicSignature",
+              "title": "Electronic Signature",
+              "hidden": true,
+              "fields": [
+                {
+                  "id": "fieldEmaileSig",
+                  "name": "Email address",
+                  "type": "Text",
+                  "mappedAttribute": "Email",
+                  "mappedEntity": "Person",
+                  "inArray": true,
+                  "arrayName": "Persons",
+                  "position": 0,
+                  "mandatory": true,
+                  "reset": false,
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "action": "hasToBeEquals",
+                          "id": "fieldEmaileSigRe",
+                          "errorsOn": "fieldEmaileSigRe"
+                        }
+                      ]
+                    }
+                  ],
+                  "width": "8",
+                  "maxlength": 255,
+                  "restriction": "email"
+                },
+                {
+                  "id": "fieldEmaileSigRe",
+                  "name": "Confirm email address",
+                  "type": "Text",
+                  "mappedAttribute": "eSigEmailRe",
+                  "mandatory": true,
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "action": "hasToBeEquals",
+                          "id": "fieldEmaileSig",
+                          "errorsOn": "fieldEmaileSigRe"
+                        }
+                      ]
+                    }
+                  ],
+                  "width": "8",
+                  "maxlength": 255,
+                  "restriction": "email"
+                },
+                {
+                  "id": "fieldSignatureDate",
+                  "name": "Signature Date",
+                  "type": "Text",
+                  "mappedAttribute": "SignatureDate",
+                  "mappedEntity": "Person",
+                  "inArray": true,
+                  "arrayName": "Persons",
+                  "position": 0,
+                  "triggers": [],
+                  "width": "5",
+                  "maxlength": 100,
+                  "hidden": true
+                },
+                {
+                  "id": "fieldSignatureTypeId",
+                  "name": "Signature Type Id",
+                  "type": "Text",
+                  "mappedAttribute": "SignatureTypeId",
+                  "triggers": [],
+                  "width": "5",
+                  "maxlength": 100,
+                  "hidden": true
+                }
+              ]
+            }
+      ],
+      "fields": []
+    }
+  ]
+}

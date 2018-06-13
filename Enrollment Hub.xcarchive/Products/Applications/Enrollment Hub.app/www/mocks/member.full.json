@@ -1,0 +1,120 @@
+{
+    "uniqueId": "1070951832",
+    "medicareNumber": "100200300A",
+    "firstName": "Andrew",
+    "middleInitial": "H",
+    "lastName": "Thomas",
+    "dateOfBirth": "1965-01-01T00:00:00",
+    "gender": "Male",
+    "email": "test@testmail.com",
+    "addresses": [
+        {
+            "type": "Permanent",
+            "address1": "100 Robert Lane",
+            "address2": "Apt 2",
+            "city": "Irving",
+            "state": "Texas",
+            "zip": "75014",
+            "county": "Dallas"
+        },
+        {
+            "type": "Work",
+            "address1": "100 Abraham Lane",
+            "address2": "Suite 205",
+            "city": "Irving",
+            "state": "Texas",
+            "zip": "75014",
+            "county": "Dallas"
+        }
+    ],
+    "phones": [
+        {
+            "type": "Cell",
+            "phoneNumber": "214-555-1111"
+        },
+        {
+            "type": "Home",
+            "phoneNumber": "214-555-2222"
+        }
+    ],
+    "plans": [
+        {
+            "planName": "Humana Preferred Rx Plan PDP",
+            "contractNumber": "H2012",
+            "pbpNumber": "147",
+            "segmentId": "000",
+            "benefitSequenceNumber": "001",
+            "productType": "PDP",
+            "premium": 236.05,
+            "effectiveDate": "2017-01-01T00:00:00",
+            "endDate": "2017-12-31T00:00:00",
+            "address": {
+                "type": "Permanent",
+                "address1": "6515 SOUTHERN STREET",
+                "address2": null,
+                "city": "HEBER SPRINGS",
+                "state": "AR",
+                "zip": "72543",
+                "county": "Cleburne"
+            },
+            "optionalSupplementalBenefits": [
+                {
+                    "packageKey": "0000001",
+                    "packageName": "test package 1",
+                    "effectiveDate": "2017-01-01T00:00:00",
+                    "endDate": "2017-12-31T00:00:00"
+                },
+                {
+                    "packageKey": "0000002",
+                    "packageName": "test package 2",
+                    "effectiveDate": "2017-01-01T00:00:00",
+                    "endDate": "2017-12-31T00:00:00"
+                }
+            ],
+            "primaryCarePhysician": {
+                "id": "1321862",
+                "name": "Dr.James H Robin",
+                "type": "PrimaryCare"
+            }
+        },
+        {
+            "planName": "HumanaChoice PPO R5826-018",
+            "contractNumber": "H5619",
+            "pbpNumber": "805",
+            "segmentId": "000",
+            "benefitSequenceNumber": "002",
+            "productType": "PDP",
+            "premium": 236.05,
+            "effectiveDate": "2018-01-01T00:00:00",
+            "endDate": "2018-12-31T00:00:00",
+            "address": {
+                "type": "Permanent",
+                "address1": "1565 Eastern STREET",
+                "address2": null,
+                "city": "California Springs",
+                "state": "CA",
+                "zip": "90210",
+                "county": "Los Angeles"
+            },
+            "optionalSupplementalBenefits": [
+                {
+                    "packageKey": "0000001",
+                    "packageName": "test package 1",
+                    "effectiveDate": "2018-01-01T00:00:00",
+                    "endDate": "2018-12-31T00:00:00"
+                },
+                {
+                    "packageKey": "0000002",
+                    "packageName": "test package 2",
+                    "effectiveDate": "2018-01-01T00:00:00",
+                    "endDate": "2018-12-31T00:00:00"
+                }
+            ],
+            "primaryCarePhysician": {
+                "id": "5622697",
+                "name": "Dr.Robert J Henry",
+                "type": "PrimaryCare"
+            }
+        }
+    ]
+}

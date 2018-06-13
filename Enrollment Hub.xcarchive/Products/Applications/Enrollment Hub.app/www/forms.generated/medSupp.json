@@ -1,0 +1,11 @@
+{
+  "name": "medSupp",
+  "id": "medSupp",
+  "mappedEntity": "Application",
+  "navType": "",
+  "sections": [],
+  "typeName": "Med Supp",
+  "helper": "MedSuppFormController",
+  "group": "Medicare Supplement",
+  "enable": true
+}

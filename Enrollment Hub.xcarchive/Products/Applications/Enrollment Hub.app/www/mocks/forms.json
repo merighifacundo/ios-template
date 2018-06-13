@@ -1,0 +1,37 @@
+{
+    "items": [
+        {
+            "uniqueId": "PHIHUM",
+            "state": "All",
+            "value": "{\"name\":\"PHIHUM\",\"id\":\"PHIHUM\",\"title\":\"Protected Health Information (PHI)\",\"tabTitle\":\"Protected Health Information Form\",\"mappedEntity\":\"PHIHUM\",\"DCN\":\"PHIDCN 2018\"}",
+            "modifiedOn": "2017-09-14T17:08:03.59"
+        },
+        {
+            "uniqueId": "PHICARE",
+            "state": "All",
+            "value": "{\"name\":\"PHICARE\",\"id\":\"PHICARE\",\"title\":\"Protected Health Information (PHI)\",\"tabTitle\":\"Protected Health Information (PHI)\",\"mappedEntity\":\"PHICARE\",\"DCN\":\"PHICARE - 2018\"}",
+            "modifiedOn": "2017-09-14T17:08:03.59"
+        },
+        {
+            "uniqueId": "MAFCARE",
+            "state": "All",
+            "value": "{\"name\":\"MAFCARE\",\"id\":\"MAFCARE\",\"title\":\"Member Authorization (MAF)\",\"tabTitle\":\"Member Authorization Form\",\"mappedEntity\":\"MAFCARE\",\"DCN\":\"MAFCARE - 2018\"}",
+            "modifiedOn": "2017-09-14T17:08:03.59"
+        },
+        {
+            "uniqueId": "MAFHUM",
+            "state": "All",
+            "value": "{\"name\":\"MAFHUM\",\"id\":\"MAFHUM\",\"title\":\"Member Authorization (MAF)\",\"tabTitle\":\"Member Authorization Form\",\"mappedEntity\":\"MAFHUM\",\"DCN\":\"MAFHUM - 2018\"}",
+            "modifiedOn": "2017-09-14T17:08:03.59"
+        },
+        {
+            "uniqueId": "HPHUM",
+            "state": "All",
+            "value": "{\"name\":\"HPHUM\",\"id\":\"HPHUM\",\"title\":\"Humana Pharmacy (HP)\",\"tabTitle\":\"Humana Pharmacy Consent Form\",\"mappedEntity\":\"HPHUM\",\"DCN\":\"HPHUM - 2018\"}",
+            "modifiedOn": "2017-09-14T17:08:03.59"
+        }
+    ],
+    "limit": 0,
+    "offset": 0,
+    "totalCount": 5
+}

@@ -1,0 +1,116 @@
+{
+  "mock": true,
+  "response": [
+  {
+    "criteria": {
+      "MedicareId": "100200300A",
+      "HumanaId": "H43954060",
+      "ApplicationId": "9CX8OBOPD31FD"
+    },
+    "items": [
+      {
+        "uniqueId": "1070951832",
+        "firstName": "TABBASUM",
+        "middleInitial": "A",
+        "lastName": "RUPP",
+        "address": {
+          "type": "Home",
+          "address1": "6515 SOUTHERN STREET",
+          "address2": null,
+          "city": "HEBER SPRINGS",
+          "state": "AR",
+          "zip": "72543",
+          "county": "Cleburne"
+        }
+      }
+    ],
+    "limit": 20,
+    "offset": 0,
+    "totalCount": 1
+  },
+  {
+    "criteria": {
+      "MedicareId": "400500600A",
+      "HumanaId": "H43954058",
+      "ApplicationId": "9CX8OBOPD31XG"
+    },
+    "items": [
+      {
+        "uniqueId": "1070951833",
+        "firstName": "TABBASUM",
+        "middleInitial": "A",
+        "lastName": "RUPP",
+        "address": {
+          "type": "Home",
+          "address1": "6515 SOUTHERN STREET",
+          "address2": null,
+          "city": "HEBER SPRINGS",
+          "state": "AR",
+          "zip": "72543",
+          "county": "Cleburne"
+        }
+      },
+      {
+        "uniqueId": "1070951834",
+        "firstName": "BOB",
+        "middleInitial": "A",
+        "lastName": "DYLAN",
+        "address": {
+          "type": "Home",
+          "address1": "6515 SOUTHERN STREET",
+          "address2": null,
+          "city": "HEBER SPRINGS",
+          "state": "AR",
+          "zip": "72543",
+          "county": "Cleburne"
+        }
+      }
+    ],
+    "limit": 20,
+    "offset": 0,
+    "totalCount": 1
+  },
+  {
+    "criteria": {
+      "MedicareId": "100200300B",
+      "HumanaId": "H43954059",
+      "ApplicationId": "9CX8OBOPD32XG"
+    },
+    "items": [
+      {
+        "uniqueId": "1070951891",
+        "firstName": "SAMEADD",
+        "middleInitial": "R",
+        "lastName": "CARLTON",
+        "address": {
+          "type": "Home",
+          "address1": "6515 SOUTHERN STREET",
+          "address2": null,
+          "city": "HEBER SPRINGS",
+          "state": "AR",
+          "zip": "72543",
+          "county": "Cleburne"
+        }
+      },
+      {
+        "uniqueId": "1070951890",
+        "firstName": "ONLYON",
+        "middleInitial": "E",
+        "lastName": "JOE",
+        "address": {
+          "type": "Home",
+          "address1": "6515 SOUTHERN STREET",
+          "address2": null,
+          "city": "HEBER SPRINGS",
+          "state": "AR",
+          "zip": "72543",
+          "county": "Cleburne"
+        }
+      }
+    ],
+    "limit": 20,
+    "offset": 0,
+    "totalCount": 1
+  }
+  ]
+}

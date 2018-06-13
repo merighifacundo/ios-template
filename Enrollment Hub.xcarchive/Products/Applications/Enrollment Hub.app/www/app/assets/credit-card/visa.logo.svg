@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="31.4px"
+	 viewBox="0 0 50 31.4" enable-background="new 0 0 50 31.4" xml:space="preserve">
+<title>Slice 1</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1" sketch:type="MSPage">
+	<g id="visa" sketch:type="MSLayerGroup">
+		<path id="Rectangle-1" sketch:type="MSShapeGroup" opacity="0.4" fill="#393939" d="M2.666,0h44.668C48.807,0,50,1.194,50,2.667
+			v26.066c0,1.473-1.193,2.667-2.666,2.667H2.666C1.193,31.4,0,30.206,0,28.733V2.667C0,1.194,1.193,0,2.666,0z"/>
+		<path id="Shape" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M18.547,22.282l2.225-13.051h3.557l-2.227,13.051H18.547
+			L18.547,22.282z"/>
+		<path id="path13" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M34.953,9.513c-0.705-0.265-1.809-0.548-3.188-0.548
+			c-3.514,0-5.99,1.771-6.012,4.307c-0.021,1.875,1.768,2.921,3.115,3.546c1.387,0.64,1.852,1.048,1.846,1.618
+			c-0.01,0.875-1.105,1.274-2.129,1.274c-1.424,0-2.182-0.197-3.35-0.686l-0.457-0.207l-0.5,2.921
+			c0.83,0.364,2.367,0.681,3.961,0.696c3.74,0,6.168-1.75,6.195-4.459c0.014-1.484-0.936-2.614-2.986-3.545
+			c-1.244-0.604-2.006-1.007-1.998-1.618c0-0.542,0.646-1.122,2.037-1.122c1.164-0.018,2.006,0.235,2.662,0.5l0.32,0.15
+			L34.953,9.513"/>
+		<path id="Path" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M44.107,9.231h-2.748c-0.852,0-1.488,0.232-1.863,1.082
+			l-5.281,11.96h3.734c0,0,0.611-1.607,0.748-1.961c0.408,0,4.037,0.006,4.557,0.006c0.105,0.457,0.434,1.955,0.434,1.955h3.301
+			L44.107,9.231L44.107,9.231z M39.746,17.658c0.295-0.752,1.418-3.647,1.418-3.647c-0.021,0.034,0.291-0.756,0.473-1.246
+			l0.238,1.125c0,0,0.682,3.115,0.824,3.769H39.746L39.746,17.658L39.746,17.658z"/>
+		<path id="path16" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M15.527,9.231l-3.482,8.899l-0.371-1.81
+			c-0.648-2.085-2.668-4.344-4.928-5.475L9.932,22.26l3.764-0.005l5.6-13.025L15.527,9.231"/>
+		<path id="path18" sketch:type="MSShapeGroup" fill="#FFFFFF" d="M8.795,9.231H3.059L3.014,9.502
+			c4.463,1.08,7.416,3.691,8.641,6.827l-1.246-5.997C10.191,9.508,9.568,9.26,8.795,9.231"/>
+	</g>
+</g>
+</svg>

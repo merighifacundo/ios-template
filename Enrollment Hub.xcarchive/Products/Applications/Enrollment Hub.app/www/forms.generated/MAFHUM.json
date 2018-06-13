@@ -1,0 +1,601 @@
+{
+  "name": "MAFHUM",
+  "id": "MAFHUM",
+  "title": "Member Authorization (MAF)",
+  "tabTitle": "Member Authorization Form",
+  "applicationType":"IND",
+  "mappedEntity": "MAFHUM",
+  "sections": [
+    {
+      "name": "Introduction",
+      "id": "MAFHUM-Introduction",
+      "title": "Introduction",
+      "index": 0,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "MAFHUM-MAFDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "contentQuery" : {
+            "addBrand":false,
+            "key":"MAFHUMIntroduction",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "width": 12,
+          "type": "Disclaimer"
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Non-Health Product info request",
+      "id": "MAFHUM-Non-Health-Product-info-request",
+      "title": "Non-Health Product info request",
+      "index": 1,
+      "subsections": [],
+      "fields": [
+        {
+          "nameQuery" : {
+            "addBrand": true,
+            "key":"NonHealthProductInfoRequest",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "id": "MAFHUM-productSelection",
+          "triggers": [{
+            "name": "onChange",
+            "actions": [
+              {
+                "id": "MAFHUM-productSelection",
+                "action": "checkChecked"
+              }
+            ]
+          }],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "mappedAttribute": "productSelection",
+          "type": "CheckBoxGroup",
+          "datasource": "MemberAuthProducts"
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Member information",
+      "id": "MAFHUM-Member-information",
+      "title": "Member information",
+      "index": 2,
+      "subsections": [],
+      "summaryMask": "true",
+      "fields": [
+        {
+          "name": "First name",
+          "id": "fieldFirstName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "fieldFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "maxlength": 35,
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "fieldMiddleInitial",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 3,
+          "type": "Text",
+          "mappedAttribute": "fieldMI",
+          "maxlength": 1,
+          "disabled": true,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true
+        },
+        {
+          "name": "Last Name",
+          "id": "fieldLastName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "fieldLastName",
+          "disabled": true
+        },
+        {
+          "name": "Permanent Address 1",
+          "id": "raStreet1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raStreet1",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true
+        },
+        {
+          "name": "Permanent Address 2",
+          "id": "raStreet2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "raStreet2",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "City",
+          "id": "raCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "restriction": "city",
+          "minlength": 2,
+          "mappedAttribute": "raCity",
+          "disabled": true
+        },
+        {
+          "name": "State",
+          "id": "MAFHUM-memberState",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "ZIP",
+          "id": "MAFHUM-memberZip",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "Zip",
+          "type": "ZipCode",
+          "maxlength": 5,
+          "minlength": 5,
+          "disabled": true,
+          "skipSummary": true,
+          "disableValidations": true
+        },
+        {
+          "name": "Phone number",
+          "id": "ciApplicantPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "MAFHUM-memberPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "ciApplicantPhone"
+                },
+                {
+                  "id": "MAFHUM-memberPhoneType",
+                  "action": "forceChangeEvent",
+                  "value": ""
+                },
+                {
+                  "id": "MAFHUM-memberPhoneType",
+                  "action": "clearIfEmpty"
+                },
+                {
+                  "action": "mandatory",
+                  "id": "MAFHUM-memberPhoneType",
+                  "value": ""
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciApplicantPhone",
+          "type": "Phone",
+          "restriction": "Phone",
+          "disabled": false
+        },
+        {
+          "name": "Phone type",
+          "id": "MAFHUM-memberPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "MAFHUM-consentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "MAFHUM-healthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "MAFHUM-contactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "disabled": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciPhoneType",
+          "type": "Radiogroup",
+          "source": [
+                {
+                  "key": "cellphone",
+                  "name": "Cell Phone"
+                },
+                {
+                  "key": "home",
+                  "name": "Home (land line)"
+                }
+              ]
+          },
+          {
+            "name": "",
+            "id": "MAFHUM-consentDisclaimer",
+            "triggers": [],
+            "hidden": true,
+            "mandatory": false,
+            "width": 12,
+            "contentQuery" : {
+              "addBrand": true,
+              "key":"Disclaimer",
+              "group":"FormIndividualPreferenceFCC"
+            },
+            "type": "Disclaimer"
+          },
+          {
+            "nameQuery" : {
+              "addBrand":true,
+              "key":"QuestionPlanInformation",
+              "group":"FormIndividualPreferenceFCC"
+            },
+            "id": "MAFHUM-healthContactDisclaimer",
+            "triggers": [],
+            "hidden": true,
+            "mandatory": true,
+            "width": 5,
+            "type": "Radiogroup",
+            "mappedAttribute": "mafHumHealthContactDisclaimer",
+            "source": [
+              {
+                "key": "yes",
+                "name": "Yes"
+              },
+              {
+                "key": "no",
+                "name": "No"
+              }
+            ]
+          },
+          {
+            "nameQuery" : {
+              "addBrand":true,
+              "key":"QuestionMarketing",
+              "group":"FormIndividualPreferenceFCC"
+            },
+            "id": "MAFHUM-contactMarketingDisclaimer",
+            "triggers": [],
+            "hidden": true,
+            "mandatory": true,
+            "width": 5,
+            "type": "Radiogroup",
+            "mappedAttribute": "mafHumContactMarketingDisclaimer",
+            "source": [
+              {
+                "key": "yes",
+                "name": "Yes"
+              },
+              {
+                "key": "no",
+                "name": "No"
+              }
+            ]
+          },
+        {
+          "name": "Gender",
+          "id": "MAFHUM-gender",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "gender",
+          "type": "Radiogroup",
+          "source": [
+              {
+                "key": "Male",
+                "name": "Male"
+              },
+              {
+                "key": "Female",
+                "name": "Female"
+              }
+          ],
+          "disabled": true
+        },
+        {
+          "name": "Email",
+          "id": "MAFHUM-email",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciApplicantEmail",
+          "type": "Text",
+          "restriction": "email",
+          "disabled": false
+        },
+        {
+          "name": "emailDisclaimer",
+          "id": "MAFHUM-emailDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"EmailDisclosure",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "skipSummary": true
+        },
+        {
+          "name": "Date of Birth",
+          "id": "MAFHUM-dateOfBirth",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "dob",
+          "type": "Datepicker",
+          "disabled": true
+        },
+        {
+          "name": "Medicare Number",
+          "id": "MAFHUM-memberMedicareNumber",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "disabled": true,
+          "mappedAttribute": "medicareNumber",
+          "type": "Text",
+          "restriction": "MedicareNumber"
+        },
+        {
+            "name": "Social Security number (Last 4 digits)",
+            "id": "MAFHUM-socialSecurityNumber",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": true,
+            "width": 5,
+            "disabled": false,
+            "mappedAttribute": "ssn",
+            "type": "Text",
+            "restriction": "numbers",
+            "maxlength": 4,
+            "minlength": 4
+        }
+      ],
+      "hidden": false
+    },
+    {
+        "name": "Licensed Agent Information",
+        "id": "MAFHUM-Agent-Information",
+        "index": 3,
+        "subsections": [],
+        "fields": [
+          {
+            "id": "MAFHUM-agentName",
+            "name": "Licensed Agent name",
+            "type": "Text",
+            "mappedAttribute": "agentName",
+            "mandatory": true,
+            "triggers": [],
+            "width": "5",
+            "maxlength": 35,
+            "restriction": "letters",
+            "fromAgent": "agentName",
+            "disabled": true
+          },
+          {
+            "id": "MAFHUM-agentSAN",
+            "name": "Licensed Agent SAN",
+            "type": "Text",
+            "mappedAttribute": "agentSAN",
+            "mandatory": true,
+            "disabled": true,
+            "triggers": [],
+            "width": "5",
+            "maxlength": 35,
+            "restriction": "numbers"
+          }
+        ],
+        "hidden": false
+    },
+    {
+      "name": "Auth & Sign",
+      "id": "MAFHUM-signature",
+      "title": "Auth & Sign",
+      "index": 4,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "MAFHUM-CancelAuthorizationDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "addBrand":true,
+            "key":"{{brandName}}AuthCancelAuthorization",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        },
+        {
+          "name": "",
+          "id": "MAFHUM-MedicareAdvantageDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "addBrand":false,
+            "key":"AuthMedicareAdvantage1",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        },
+        {
+          "name": "",
+          "id": "MAFHUM-MultiLanguageDisclaimerDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "ImageDisclaimer",
+          "contentQuery" : {
+            "addBrand":true,
+            "key":"{{brandName}}MultiLanguageDisclaimer",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"AuthRoleSignatory",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "id": "MAFHUM-signType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "action": "showOrHide",
+                  "id": "MAFHUM-relationshipToApplicant",
+                  "value": "LegalRepresentative"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "signType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "self",
+              "name": "Self"
+            },
+            {
+              "key": "LegalRepresentative",
+              "name": "Legal Representative"
+            }
+          ]
+        },
+        {
+          "name": "Relationship to applicant",
+          "id": "MAFHUM-relationshipToApplicant",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "relationshipToApplicant",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "spouse",
+              "name": "Spouse"
+            },
+            {
+              "key": "sibling",
+              "name": "Sibling"
+            },
+            {
+              "key": "parent",
+              "name": "Parent"
+            },
+            {
+              "key": "child",
+              "name": "Child"
+            },
+            {
+              "key": "agentBroker",
+              "name": "Agent/Broker"
+            },
+            {
+              "key": "friend",
+              "name": "Friend"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            },
+            {
+              "key": "other",
+              "name": "Other"
+            }
+          ]
+        },
+        {
+          "name": "Signature of Member/Legal Representative",
+          "id": "signature_user",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "alwaysMandatory": true,
+          "disabled": true,
+          "width": 5,
+          "type": "Signature",
+          "mappedAttribute": "signature"
+        }
+      ],
+      "hidden": false
+    }
+  ],
+  "helper": "MAFFormHelper"
+}

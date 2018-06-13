@@ -1,0 +1,995 @@
+{
+  "name": "PHIHUM",
+  "id": "PHIHUM",
+  "title": "Protected Health Information (PHI)",
+  "tabTitle": "Protected Health Information Form",
+  "applicationType":"IND",
+  "mappedEntity": "PHIHUM",
+  "sections": [
+    {
+      "name": "Disclaimer",
+      "id": "PHIHUM-Disclaimer",
+      "title": "Disclaimer",
+      "index": 0,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "PHIHUM-humanaDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"PHIIntroduction",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Member information",
+      "id": "PHIHUM-Member-information",
+      "title": "Member information",
+      "index": 1,
+      "summaryMask": true,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "First name",
+          "id": "fieldFirstName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "fieldFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "disabled": true,
+          "maxlength": 20,
+          "skipSummary": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "fieldMiddleInitial",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 3,
+          "type": "Text",
+          "mappedAttribute": "fieldMI",
+          "maxlength": 1,
+          "disabled": true,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true
+        },
+        {
+          "name": "Last Name",
+          "id": "fieldLastName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "disabled": true,
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "fieldLastName"
+        },
+        {
+          "name": "Date of birth",
+          "id": "PHIHUM-memberDateOfBirth",
+          "triggers": [],
+          "hidden": false,
+          "disabled": true,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "dob",
+          "type": "Datepicker"
+        },
+        {
+          "name": "Address 1",
+          "id": "raStreet1",
+          "triggers": [],
+          "hidden": false,
+          "disabled": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raStreet1",
+          "type": "Text",
+          "restriction": "address"
+        },
+        {
+          "name": "Address 2",
+          "id": "raStreet2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "disabled": true,
+          "width": 5,
+          "mappedAttribute": "raStreet2",
+          "type": "Text",
+          "restriction": "address",
+          "skipSummary": true
+        },
+        {
+          "name": "City",
+          "id": "raCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "disabled": true,
+          "width": 5,
+          "type": "Text",
+          "minlength": 2,
+          "mappedAttribute": "raCity"
+        },
+        {
+          "name": "State",
+          "id": "PHIHUM-memberState",
+          "triggers": [],
+          "hidden": false,
+          "disabled": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "skipSummary": true
+        },
+        {
+          "name": "ZIP code",
+          "id": "PHIHUM-memberZip",
+          "triggers": [],
+          "hidden": false,
+          "disabled": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "Zip",
+          "type": "ZipCode",
+          "disableValidations": true,
+          "maxlength": 5,
+          "minlength": 5,
+          "skipSummary": true
+        },
+        {
+          "name": "Phone number",
+          "id": "ciApplicantPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHIHUM-memberPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "ciApplicantPhone"
+                },
+                {
+                  "id": "PHIHUM-memberPhoneType",
+                  "action": "forceChangeEvent",
+                  "value": ""
+                },
+                {
+                  "id": "PHIHUM-memberPhoneType",
+                  "action": "clearIfEmpty"
+                },
+                {
+                  "action": "mandatory",
+                  "id": "PHIHUM-memberPhoneType",
+                  "value": ""
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "disabled": true,
+          "mappedAttribute": "ciApplicantPhone",
+          "type": "Phone",
+          "restriction": "Phone"
+        },
+        {
+          "name": "Phone type",
+          "id": "PHIHUM-memberPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHIHUM-consentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHIHUM-healthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHIHUM-contactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "disabled": true,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciPhoneType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "cellphone",
+              "name": "Cell Phone"
+            },
+            {
+              "key": "home",
+              "name": "Home (land line)"
+            }
+          ]
+        },
+        {
+          "name": "",
+          "id": "PHIHUM-consentDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"Disclaimer",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionPlanInformation",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHIHUM-healthContactDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "fccFirstQuestion",
+          "source": "YES/NO",
+          "disabled": true
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionMarketing",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHIHUM-contactMarketingDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "fccSecondQuestion",
+          "source": "YES/NO",
+          "disabled": true
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "PHI disclosure details",
+      "id": "PHIHUM-PHI-disclosure-details",
+      "title": "PHI disclosure details",
+      "index": 2,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "Disclosure type",
+          "id": "PHIHUM-disclosureType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHIHUM-limitDisclosureStatement",
+                  "action": "showOrHide",
+                  "value": "limited"
+                },
+                {
+                  "id": "PHIHUM-LimitedDisclosureEntry",
+                  "action": "showOrHide",
+                  "value": "limited"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-LimitedDisclosureProducts",
+                  "value": "limited"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-fullDisclosureStatement",
+                  "value": "full"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "disclosureType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "full",
+              "name": "Full"
+            },
+            {
+              "key": "limited",
+              "name": "Limited"
+            }
+          ]
+        },
+        {
+          "name": "Full Disclosure Statement",
+          "id": "PHIHUM-fullDisclosureStatement",
+          "triggers": [],
+          "hidden": true,
+          "disabled": true,
+          "mandatory": false,
+          "contentQuery" : {
+            "key":"FullDisclosure",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "width": 5,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "Limit Disclosure Statement",
+          "id": "PHIHUM-limitDisclosureStatement",
+          "triggers": [],
+          "hidden": true,
+          "disabled": true,
+          "mandatory": false,
+          "contentQuery" : {
+            "key":"LimitDisclosure",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "width": 5,
+          "type": "Disclaimer"
+        },
+        {
+          "name": "Limited disclosure entry",
+          "id": "PHIHUM-LimitedDisclosureEntry",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 5,
+          "type": "TextArea",
+          "maxlength": 500,
+          "mappedAttribute": "limitedDisclosureEntry"
+        },
+        {
+          "name": "Limited disclosure products",
+          "id": "PHIHUM-LimitedDisclosureProducts",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 12,
+          "mappedAttribute": "limitedDisclosureProducts",
+          "type": "CheckBoxGroup",
+          "source": [
+            {
+              "key": "medical",
+              "name": "Medical and/or Prescription Coverage"
+            },
+            {
+              "key": "dental",
+              "name": "Dental"
+            },
+            {
+              "key": "vision",
+              "name": "Vision"
+            },
+            {
+              "key": "go365",
+              "name": "Go365"
+            },
+            {
+              "key": "humanaPharmacy",
+              "name": "Humana Pharmacy"
+            }
+          ]
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Information Disclosed to",
+      "id": "PHIHUM-Information-Disclosed-to",
+      "title": "Information Disclosed to",
+      "index": 3,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "informationDisclaimer",
+          "id": "PHIHUM-informationDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"ProvidingConsentDisclose",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        },
+        {
+          "name": "",
+          "id": "PHIHUM-individualOrOrganization",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-informationFirstName",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-informationLastName",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-informationMiddleInitial",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-informationDateOfBirth",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-informationOrganization",
+                  "value": "organization"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-relationshipToApplicantField",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "PHIHUM-relationshipToApplicantField",
+                  "value": "organization"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "individualOrOrganization",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "individual",
+              "name": "Individual"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            }
+          ]
+        },
+        {
+          "name": "First name",
+          "id": "PHIHUM-informationFirstName",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "maxlength": 20,
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "PHIHUM-informationMiddleInitial",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 3,
+          "type": "Text",
+          "mappedAttribute": "informationMiddleInitial",
+          "maxlength": 1,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "Last Name",
+          "id": "PHIHUM-informationLastName",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "informationLastName"
+        },
+        {
+          "name": "Date of birth",
+          "id": "PHIHUM-informationDateOfBirth",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "informationDateOfBirth",
+          "type": "Datepicker",
+          "summaryMask": true
+        },
+        {
+          "name": "Organization",
+          "id": "PHIHUM-informationOrganization",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "type": "Text",
+          "width": 5,
+          "mappedAttribute": "informationOrganization",
+          "restriction": "letters"
+        },
+        {
+          "name": "Address 1",
+          "id": "PHIHUM-informationAddress1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationAddress1",
+          "type": "Text",
+          "restriction": "address",
+          "summaryMask": true
+        },
+        {
+          "name": "Address 2",
+          "id": "PHIHUM-informationAddress2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "informationAddress2",
+          "type": "Text",
+          "restriction": "address",
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "ZIP code",
+          "id": "PHIHUM-informationZip",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationZip",
+          "type": "ZipCode",
+          "maxlength": 5,
+          "minlength": 5,
+          "disableValidations": true,
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "City",
+          "id": "PHIHUM-informationCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "restriction": "city",
+          "minlength": 2,
+          "mappedAttribute": "informationCity"
+        },
+        {
+          "name": "State",
+          "id": "PHIHUM-informationState",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "County",
+          "id": "PHIHUM-informationCounty",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationCounty",
+          "type": "Text",
+          "summaryMask": true
+        },
+        {
+          "name": "Email",
+          "id": "PHIHUM-informationEmail",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "informationEmail",
+          "type": "Text",
+          "restriction": "email",
+          "summaryMask": true
+        },
+        {
+          "name": "Phone number",
+          "id": "PHIHUM-informationPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHIHUM-informationPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "PHIHUM-informationPhone"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "informationPhone",
+          "type": "Phone",
+          "restriction": "Phone",
+          "summaryMask": true
+        },
+        {
+          "name": "Phone type",
+          "id": "PHIHUM-informationPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHIHUM-informationConsentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHIHUM-informationHealthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHIHUM-informationContactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationPhoneType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "cellphone",
+              "name": "Cell Phone"
+            },
+            {
+              "key": "home",
+              "name": "Home (land line)"
+            }
+          ],
+          "summaryMask": true
+        },
+        {
+          "name": "",
+          "id": "PHIHUM-informationConsentDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"Disclaimer",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionPlanInformation",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHIHUM-informationHealthContactDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "infoPhiHealthContactDisclaimer",
+          "source": "YES/NO"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionMarketing",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHIHUM-informationContactMarketingDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "infoPhiContactMarketingDisclaimer",
+          "source": "YES/NO"
+        },
+        {
+          "id": "PHIHUM-Gender",
+          "name": "Gender",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "Male",
+              "name": "Male"
+            },
+            {
+              "key": "Female",
+              "name": "Female"
+            }
+          ],
+          "mappedAttribute": "phiGender",
+          "mandatory": true,
+          "triggers": [],
+          "width": "5",
+          "summaryMask": true
+        },
+        {
+          "name": "Relationship to applicant",
+          "id": "PHIHUM-relationshipToApplicantField",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "relationshipToApplicant",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "spouse",
+              "name": "Spouse"
+            },
+            {
+              "key": "sibling",
+              "name": "Sibling"
+            },
+            {
+              "key": "parent",
+              "name": "Parent"
+            },
+            {
+              "key": "child",
+              "name": "Child"
+            },
+            {
+              "key": "agentBroker",
+              "name": "Agent/Broker"
+            },
+            {
+              "key": "friend",
+              "name": "Friend"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            }
+          ],
+          "summaryMask": true
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Auth & Sign",
+      "id": "PHIHUM-signature",
+      "title": "Auth & Sign",
+      "index": 4,
+      "fields": [
+            {
+              "name": "",
+              "id": "PHIHUM-AuthExpireDisclaimer",
+              "triggers": [],
+              "hidden": false,
+              "mandatory": false,
+              "width": 5,
+              "type": "Disclaimer",
+              "contentQuery" : {
+                "addBrand":true,
+                "key":"AuthExpire",
+                "group":"PostEnrollmentDisclaimer"
+              }
+            },
+            {
+            "name": "",
+            "id": "PHIHUM-AuthProtectedHealthInformationDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"AuthProtectedHealthInformation",
+                "group":"PostEnrollmentDisclaimer"
+            }
+          },
+          {
+            "name": "",
+            "id": "PHIHUM-LegalRepresentativesDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}LegalRepresentatives",
+                "group":"PostEnrollmentDisclaimer"
+            }
+          },
+          {
+            "name": "",
+            "id": "PHIHUM-MultiLanguageDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 12,
+            "type": "ImageDisclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}MultiLanguageDisclaimer",
+                "group":"PostEnrollmentDisclaimer"
+            }
+          },
+          {
+            "name": "",
+            "id": "PHIHUM-Disclaimer6",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "content": "Agent Note: Please let applicant know that they may authorize additional persons online at MyHumana."
+          },
+          {
+              "id": "PHIHUM-signatureType",
+              "name": "Choose the preferred signature method for this enrollment",
+              "type": "Radiogroup",
+              "mappedAttribute": "SignatureType",
+              "width": "5",
+              "datasource": "SignatureType",
+              "mandatory": true,
+              "hidden": true,
+              "triggers": [
+                  {
+                    "name": "onChange",
+                    "actions": [
+                      {
+                        "id": "signature_user",
+                        "action": "showOrHide",
+                        "value": "DigitalSignature"
+                      },
+                      {
+                        "id": "electronicSignature",
+                        "action": "showOrHide",
+                        "value": "ElectronicSignature"
+                      }
+                    ]
+                  }
+              ]
+            },
+            {
+              "name": "Signatory type",
+              "id": "PHIHUM-signType",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "showOrHide",
+                      "id": "PHIHUM-relationshipToApplicant",
+                      "value": "LegalRepresentative"
+                    },
+                    {
+                      "action": "showOrHide",
+                      "id": "PHIHUM-legalRepDisclaimer",
+                      "value": "LegalRepresentative"
+                    }
+                  ]
+                }
+                ],
+              "hidden": false,
+              "mandatory": true,
+              "width": 5,
+              "mappedAttribute": "signType",
+              "type": "Radiogroup",
+              "source": [
+                {
+                  "key": "Member",
+                  "name": "Self"
+                },
+                {
+                  "key": "LegalRepresentative",
+                  "name": "Legal Representative"
+                }
+              ]
+          },
+          {
+              "name": "Signature of Member/Legal Representative",
+              "id": "signature_user",
+              "triggers": [],
+              "hidden": false,
+              "disabled": true,
+              "mandatory": true,
+              "alwaysMandatory": true,
+              "width": 5,
+              "type": "Signature",
+              "mappedAttribute": "signature"
+            }
+      ],
+      "subsections": [],
+      "hidden": false
+    }
+  ],
+  "helper": "PHIFormHelper"
+}

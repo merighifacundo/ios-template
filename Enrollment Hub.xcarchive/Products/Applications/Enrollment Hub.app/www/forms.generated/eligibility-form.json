@@ -1,0 +1,305 @@
+{
+  "name": "eligibility-form",
+  "id": "eligibility-form",
+  "mappedEntity": "",
+  "navType": "none",
+  "sections": [
+    {
+      "name": "Eligibility Determination",
+      "id": "elegibility",
+      "title": "Eligibility Determination",
+      "index": 0,
+      "subsections": [
+        {
+          "title": "Personal Details",
+          "id": "personalDetails",
+          "fields": [
+            {
+              "id": "fieldFirstName",
+              "name": "First Name",
+              "type": "Text",
+              "mappedAttribute": "FirstName",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "fromAppointment": "firstName",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fieldSignatureUser",
+                      "action": "setSignUser"
+                    }
+                  ]
+                }
+              ],
+              "width": "12",
+              "maxlength": 20,
+              "restriction": "letters"
+            },
+            {
+              "id": "fieldLastName",
+              "name": "Last name",
+              "type": "Text",
+              "mappedAttribute": "LastName",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "mandatory": true,
+              "fromAppointment": "lastName",
+              "triggers": [],
+              "width": "12",
+              "maxlength": 35,
+              "restriction": "letters"
+            },
+            {
+              "id": "fieldMI",
+              "name": "Middle initial",
+              "type": "Text",
+              "mappedAttribute": "MiddleInitial",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "mandatory": false,
+              "triggers": [],
+              "width": "2",
+              "maxlength": 1,
+              "restriction": "letters"
+            },
+            {
+              "id": "fieldPersonGender",
+              "name": "Select Gender",
+              "type": "Radiogroup",
+              "source": [
+                {
+                  "key": "gtMale",
+                  "name": "Male"
+                },
+                {
+                  "key": "gtFemale",
+                  "name": "Female"
+                }
+              ],
+              "mappedAttribute": "Gender",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "action": "executeService",
+                      "serviceName": "ChronicalManager",
+                      "serviceMethod": "invalidate",
+                      "id": "fieldPersonGender"
+                    }
+                  ]
+                }
+              ],
+              "width": "6"
+            },
+            {
+              "id": "fieldDOB",
+              "name": "Date of Birth",
+              "type": "Datepicker",
+				      "restriction": "dob",
+              "mappedAttribute": "DOB",
+              "mappedEntity": "Person",
+              "inArray": true,
+              "arrayName": "Persons",
+              "position": 0,
+              "mandatory": true,
+              "triggers": [],
+              "width": "8",              
+              "fromAppointment": "dob"
+            }
+          ]
+        },
+        {
+          "title": "Medicare ID Card Information",
+          "id": "hospitalInsurance",
+          "fields": [
+            {
+              "id": "fieldPlanYear",
+              "name": "Plan Year",
+              "type": "Dropdown",
+              "mappedAttribute": "PlanYear",
+              "customValidation": "planYearValidation",
+              "datasource": "planyear",
+              "mandatory": true,
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fieldProposedEffectiveDate",
+                      "action": "populateEfectiveDate"
+                    }
+                  ]
+                },
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fieldEffectiveDate",
+                      "action": "populateEfectiveDate"
+                    }
+                  ]
+                }
+              ],
+              "width": "8"
+            },
+            {
+              "id": "fieldPartA",
+              "name": "Part A",
+              "type": "Datepicker",
+              "mappedAttribute": "PartAEffectiveDate",
+              "customValidation": "partValidation",
+              "startsFirstOfMonth": true,
+              "mandatory": true,
+              "triggers": [],
+              "width": "12"
+            },
+            {
+              "id": "fieldPartB",
+              "name": "Part B",
+              "type": "Datepicker",
+              "mappedAttribute": "PartBEffectiveDate",
+              "customValidation": "partValidation",
+              "startsFirstOfMonth": true,
+              "mandatory": true,
+              "triggers": [],
+              "width": "12"
+            },
+            {
+              "id": "fieldMedicareNumber",
+              "name": "Medicare Number",
+              "type": "MedicareNumber",
+              "mappedAttribute": "MedClaimNumber",
+              "mandatory": true,
+              "triggers": [],
+              "width": "12",
+              "restriction": "MedicareNumber"
+            }
+          ]
+        },
+        {
+          "title": "Location",
+          "id": "locationElegibility",
+          "fields": [
+            {
+              "id": "fieldCountyD",
+              "name": "County",
+              "type": "Dropdown",
+              "mappedAttribute": "County",
+              "datasource": "county",
+              "fromAppointment": "county",
+              "mandatory": true,
+              "triggers": [],
+              "width": "7"
+            },
+            {
+              "id": "fieldZipD",
+              "name": "ZIP",
+              "type": "ZipCode",
+              "mappedAttribute": "Zip",
+              "mappedEntity": "Address",
+              "inArray": true,
+              "arrayName": "Addresses",
+              "position": 0,
+              "belongsTo": [
+                "Persons",
+                0
+              ],
+              "mandatory": true,
+              "restriction": "numbers",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fieldState",
+                      "action": "populate",
+                      "fromField": "state"
+                    }
+                  ]
+                },
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "id": "fieldCountyD",
+                      "action": "populate",
+                      "fromField": "county"
+                    }
+                  ]
+                },
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "conditional": "fieldSameMail",
+                      "id": "fieldMailingZip",
+                      "action": "autocomplete"
+                    }
+                  ]
+                }
+              ],
+              "width": "4",
+              "maxlength": 5,
+              "minlength": 5
+            },
+            {
+              "id": "fieldState",
+              "name": "State",
+              "type": "Dropdown",
+              "mandatory": true,
+              "width": "7",
+              "datasource": "state",
+              "triggers": [
+                {
+                  "name": "onChange",
+                  "actions": [
+                    {
+                      "conditional": "fieldSameMail",
+                      "id": "fieldMailingState",
+                      "action": "autocomplete"
+                    }
+                  ]
+                }
+              ],
+              "disabled": "false"
+            }
+          ]
+        },
+        {
+          "title": "SOA",
+          "id": "soaId",
+          "fields": [
+            {
+              "id": "fieldSOAID",
+              "name": "SOA ID",
+              "type": "Text",
+              "disabled": true,
+              "triggers": [],
+              "fromAppointment": "verintCallRecId",
+              "optional": false,
+              "width": "8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typeName": "Elegibility Form",
+  "helper": "EligibilityHelper",
+  "enable": true
+}

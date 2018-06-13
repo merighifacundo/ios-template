@@ -1,0 +1,603 @@
+{
+    "name": "MAFCARE",
+    "id": "MAFCARE",
+    "title": "Member Authorization (MAF)",
+    "tabTitle": "Member Authorization Form",
+    "applicationType":"IND",
+    "mappedEntity": "MAFCARE",
+    "sections": [
+        {
+            "name": "Introduction",
+            "id": "MAFCARE-Introduction",
+            "title": "Introduction",
+            "index": 0,
+            "subsections": [],
+            "fields": [
+                {
+                    "name": "",
+                    "id": "MAFCARE-MAFDisclaimer",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": false,
+                    "width": 12,
+                    "type": "Disclaimer",
+                    "contentQuery" : {
+                        "addBrand":false,
+                        "key":"MAFCAREIntroduction",
+                        "group":"PostEnrollmentDisclaimer"
+                    }
+                }
+            ],
+            "hidden": false
+        },
+        {
+            "name": "Non-Health Product info request",
+            "id": "MAFCARE-Non-Health-Product-info-request",
+            "title": "Non-Health Product info request",
+            "index": 1,
+            "subsections": [],
+            "fields": [
+                {
+                    "id": "MAFCARE-productSelection",
+                    "nameQuery" : {
+                        "addBrand": true,
+                        "key":"NonHealthProductInfoRequest",
+                        "group":"PostEnrollmentDisclaimer"
+                    },
+                    "triggers": [{
+                        "name": "onChange",
+                        "actions": [
+                            {
+                                "id": "MAFCARE-productSelection",
+                                "action": "checkChecked"
+                            }
+                        ]
+                    }],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 12,
+                    "mappedAttribute": "productSelection",
+                    "type": "CheckBoxGroup",
+                    "datasource": "MemberAuthProducts_CarePlus"
+                },
+                {
+                    "id": "MAFCARE-productSelectionDisclaimer",
+                    "hidden": false,
+                    "width": 12,
+                    "contentQuery" : {
+                        "key":"productSelectionDisclaimer",
+                        "group":"PostEnrollmentDisclaimer"
+                    },
+                    "type": "Disclaimer"
+                }
+            ],
+            "hidden": false
+        },
+        {
+            "name": "Member information",
+            "id": "MAFCARE-Member-information",
+            "title": "Member information",
+            "summaryMask": true,
+            "index": 2,
+            "subsections": [],
+            "fields": [
+                {
+                    "name": "First name",
+                    "id": "fieldFirstName",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "fieldFirstName",
+                    "type": "Text",
+                    "restriction": {
+                        "value": "lettersAndSpace",
+                        "restrict": true
+                    },
+                    "maxlength": 35,
+                    "disabled": true,
+                    "skipSummary": true
+                },
+                {
+                    "name": "MI",
+                    "id": "fieldMiddleInitial",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": false,
+                    "width": 3,
+                    "type": "Text",
+                    "mappedAttribute": "fieldMI",
+                    "maxlength": 1,
+                    "disabled": true,
+                    "restriction": {
+                        "value": "onlyLetters",
+                        "restrict": true
+                    },
+                    "skipSummary": true
+                },
+                {
+                    "name": "Last Name",
+                    "id": "fieldLastName",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "type": "Text",
+                    "maxlength": 35,
+                    "restriction": {
+                        "value": "lettersAndSpace",
+                        "restrict": true
+                    },
+                    "mappedAttribute": "fieldLastName",
+                    "disabled": true
+                },
+                {
+                    "name": "Date of Birth",
+                    "id": "MAFCARE-dateOfBirth",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "restriction": "dob",
+                    "mappedAttribute": "dob",
+                    "type": "Datepicker",
+                    "disabled": true
+                },
+                {
+                    "name": "Permanent Address 1",
+                    "id": "raStreet1",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "raStreet1",
+                    "type": "Text",
+                    "restriction": "address",
+                    "disabled": true
+                },
+                {
+                    "name": "Permanent Address 2",
+                    "id": "raStreet2",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": false,
+                    "width": 5,
+                    "mappedAttribute": "raStreet2",
+                    "type": "Text",
+                    "restriction": "address",
+                    "disabled": true,
+                    "skipSummary": true
+                },
+                {
+                    "name": "City",
+                    "id": "raCity",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "type": "Text",
+                    "restriction": "city",
+                    "minlength": 2,
+                    "mappedAttribute": "raCity",
+                    "disabled": true
+                },
+                {
+                    "name": "State",
+                    "id": "MAFCARE-memberState",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "raState",
+                    "type": "Dropdown",
+                    "datasource": "state",
+                    "disabled": true,
+                    "skipSummary": true
+                },
+                {
+                    "name": "ZIP",
+                    "id": "MAFCARE-memberZip",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "Zip",
+                    "type": "ZipCode",
+                    "maxlength": 5,
+                    "minlength": 5,
+                    "disabled": true,
+                    "skipSummary": true,
+                    "disableValidations": true
+                },
+                {
+                  "name": "Phone number",
+                  "id": "ciApplicantPhone",
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "id": "MAFCARE-memberPhoneType",
+                          "action": "showOrHide",
+                          "checkEmpty": true,
+                          "value": "",
+                          "fromField": "ciApplicantPhone"
+                        },
+                        {
+                          "id": "MAFCARE-memberPhoneType",
+                          "action": "forceChangeEvent",
+                          "value": ""
+                        },
+                        {
+                          "id": "MAFCARE-memberPhoneType",
+                          "action": "clearIfEmpty"
+                        },
+                        {
+                          "action": "mandatory",
+                          "id": "MAFCARE-memberPhoneType",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "hidden": false,
+                  "mandatory": false,
+                  "width": 5,
+                  "disabled": false,
+                  "mappedAttribute": "ciApplicantPhone",
+                  "type": "Phone",
+                  "restriction": "Phone"
+                },
+                {
+                  "name": "Phone type",
+                  "id": "MAFCARE-memberPhoneType",
+                  "triggers": [
+                    {
+                      "name": "onChange",
+                      "actions": [
+                        {
+                          "id": "MAFCARE-consentDisclaimer",
+                          "action": "showOrHide",
+                          "value": "cellphone"
+                        },
+                        {
+                            "id": "MAFCARE-healthContactDisclaimer",
+                            "action": "showOrHide",
+                            "value": "cellphone"
+                        },
+                        {
+                            "id": "MAFCARE-contactMarketingDisclaimer",
+                            "action": "showOrHide",
+                            "value": "cellphone"
+                        }
+                      ]
+                    }
+                  ],
+                  "hidden": true,
+                  "disabled": false,
+                  "mandatory": false,
+                  "width": 5,
+                  "mappedAttribute": "ciPhoneType",
+                  "type": "Radiogroup",
+                  "source": [
+                        {
+                          "key": "cellphone",
+                          "name": "Cell Phone"
+                        },
+                        {
+                          "key": "home",
+                          "name": "Home (land line)"
+                        }
+                      ]
+                },
+                {
+                    "name": "",
+                    "id": "MAFCARE-consentDisclaimer",
+                    "triggers": [],
+                    "hidden": true,
+                    "mandatory": false,
+                    "width": 12,
+                    "contentQuery" : {
+                        "addBrand": true,
+                        "key":"Disclaimer",
+                        "group":"FormIndividualPreferenceFCC"
+                    },
+                    "type": "Disclaimer"
+                },
+                {
+                    "nameQuery" : {
+                        "addBrand":true,
+                        "key":"QuestionPlanInformation",
+                        "group":"FormIndividualPreferenceFCC"
+                    },
+                    "id": "MAFCARE-healthContactDisclaimer",
+                    "triggers": [],
+                    "hidden": true,
+                    "mandatory": true,
+                    "width": 5,
+                    "type": "Radiogroup",
+                    "mappedAttribute": "mafHumHealthContactDisclaimer",
+                    "source": [
+                        {
+                        "key": "yes",
+                        "name": "Yes"
+                        },
+                        {
+                        "key": "no",
+                        "name": "No"
+                        }
+                    ]
+                },
+                {
+                    "nameQuery" : {
+                        "addBrand":true,
+                        "key":"QuestionMarketing",
+                        "group":"FormIndividualPreferenceFCC"
+                    },
+                    "id": "MAFCARE-contactMarketingDisclaimer",
+                    "triggers": [],
+                    "hidden": true,
+                    "mandatory": true,
+                    "width": 5,
+                    "type": "Radiogroup",
+                    "mappedAttribute": "mafHumContactMarketingDisclaimer",
+                    "source": [
+                        {
+                        "key": "yes",
+                        "name": "Yes"
+                        },
+                        {
+                        "key": "no",
+                        "name": "No"
+                        }
+                    ]
+                },
+                {
+                    "name": "Email",
+                    "id": "MAFCARE-email",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": false,
+                    "width": 5,
+                    "mappedAttribute": "ciApplicantEmail",
+                    "type": "Text",
+                    "restriction": "email",
+                    "disabled": false
+                },
+                {
+                    "name": "emailDisclaimer",
+                    "id": "MAFHUM-emailDisclaimer",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": false,
+                    "width": 5,
+                    "type": "Disclaimer",
+                    "content": "By providing your email/phone number, you consent to receiving information via email or phone",
+                    "skipSummary": true
+                },
+                {
+                    "name": "Medicare Number",
+                    "id": "MAFCARE-memberMedicareNumber",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "disabled": true,
+                    "mappedAttribute": "medicareNumber",
+                    "type": "Text",
+                    "restriction": "MedicareNumber"
+                },
+                {
+                    "name": "Gender",
+                    "id": "MAFCARE-gender",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "gender",
+                    "type": "Radiogroup",
+                    "source": [
+                        {
+                          "key": "Male",
+                          "name": "Male"
+                        },
+                        {
+                          "key": "Female",
+                          "name": "Female"
+                        }
+                    ],
+                    "disabled": true
+                }
+            ],
+            "hidden": false
+        },
+        {
+            "id": "MAFCARE-Agent-Information",
+            "name": "Licensed Agent Information",
+            "index": 3,
+            "subsections": [],
+            "fields": [
+                {
+                    "id": "MAFCARE-agentName",
+                    "name": "Licensed Agent name",
+                    "type": "Text",
+                    "mappedAttribute": "agentName",
+                    "mandatory": true,
+                    "triggers": [],
+                    "width": "5",
+                    "maxlength": 35,
+                    "restriction": "letters",
+                    "fromAgent": "agentName",
+                    "disabled": true
+                },
+                {
+                    "id": "MAFCARE-agentSAN",
+                    "name": "Licensed Agent SAN",
+                    "type": "Text",
+                    "mappedAttribute": "agentSAN",
+                    "mandatory": true,
+                    "disabled": true,
+                    "triggers": [],
+                    "width": "5",
+                    "maxlength": 35,
+                    "restriction": "numbers"
+                }
+            ],
+            "hidden": false
+        },
+        {
+            "name": "Auth & Sign",
+            "id": "MAFCARE-signature",
+            "title": "Auth & Sign",
+            "index": 4,
+            "subsections": [],
+            "fields": [
+                {
+                  "name": "",
+                  "id": "MAFCARE-CancelAuthorizationDisclaimer",
+                  "triggers": [],
+                  "hidden": false,
+                  "mandatory": false,
+                  "width": 5,
+                  "type": "Disclaimer",
+                  "contentQuery" : {
+                    "addBrand":true,
+                    "key":"{{brandName}}AuthCancelAuthorization",
+                    "group":"PostEnrollmentDisclaimer"
+                  }
+                },
+                {
+                  "name": "",
+                  "id": "MAFCARE-productSelectionDisclaimer2",
+                  "triggers": [],
+                  "hidden": false,
+                  "mandatory": false,
+                  "width": 5,
+                  "type": "Disclaimer",
+                  "content" : "I understand that I don't have to sign this authorization and that CarePlus can't condition treatment, payment, enrollment, or eligibility of benefits on whether I sign this authorization."
+                },
+                {
+                  "name": "",
+                  "id": "MAFCARE-productSelectionDisclaimer1",
+                  "triggers": [],
+                  "hidden": false,
+                  "mandatory": false,
+                  "width": 5,
+                  "type": "Disclaimer",
+                  "contentQuery" : {
+                    "addBrand":true,
+                    "key":"productSelectionDisclaimer1",
+                    "group":"PostEnrollmentDisclaimer"
+                  }
+                },
+                {
+                  "name": "",
+                  "id": "MAFCARE-MultiLanguageDisclaimerDisclaimer",
+                  "triggers": [],
+                  "hidden": false,
+                  "mandatory": false,
+                  "width": 12,
+                  "type": "ImageDisclaimer",
+                  "contentQuery" : {
+                    "addBrand":true,
+                    "key":"{{brandName}}MultiLanguageDisclaimer",
+                    "group":"PostEnrollmentDisclaimer"
+                  }
+                },
+                {
+                    "nameQuery" : {
+                        "addBrand":true,
+                        "key":"AuthRoleSignatory",
+                        "group":"PostEnrollmentDisclaimer"
+                    },
+                    "id": "MAFCARE-signType",
+                    "triggers": [
+                        {
+                            "name": "onChange",
+                            "actions": [
+                                {
+                                    "action": "showOrHide",
+                                    "id": "MAFCARE-relationshipToApplicant",
+                                    "value": "LegalRepresentative"
+                                }
+                            ]
+                        }
+                    ],
+                    "hidden": false,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "signType",
+                    "type": "Radiogroup",
+                    "source": [
+                        {
+                            "key": "self",
+                            "name": "Self"
+                        },
+                        {
+                            "key": "LegalRepresentative",
+                            "name": "Legal Representative"
+                        }
+                    ]
+                },
+                {
+                    "name": "Relationship to applicant",
+                    "id": "MAFCARE-relationshipToApplicant",
+                    "triggers": [],
+                    "hidden": true,
+                    "mandatory": true,
+                    "width": 5,
+                    "mappedAttribute": "relationshipToApplicant",
+                    "type": "Radiogroup",
+                    "source": [
+                      {
+                        "key": "spouse",
+                        "name": "Spouse"
+                      },
+                      {
+                        "key": "sibling",
+                        "name": "Sibling"
+                      },
+                      {
+                        "key": "parent",
+                        "name": "Parent"
+                      },
+                      {
+                        "key": "child",
+                        "name": "Child"
+                      },
+                      {
+                        "key": "agentBroker",
+                        "name": "Agent/Broker"
+                      },
+                      {
+                        "key": "friend",
+                        "name": "Friend"
+                      },
+                      {
+                        "key": "organization",
+                        "name": "Organization"
+                      },
+                      {
+                        "key": "other",
+                        "name": "Other"
+                      }
+                    ]
+                },
+                {
+                    "name": "Signature of Member/Legal Representative",
+                    "id": "signature_user",
+                    "triggers": [],
+                    "hidden": false,
+                    "mandatory": true,
+                    "alwaysMandatory": true,
+                    "disabled": true,
+                    "width": 5,
+                    "type": "Signature",
+                    "mappedAttribute": "signature"
+                }
+            ],
+            "hidden": false
+        }
+    ],
+    "helper": "MAFFormHelper"
+}

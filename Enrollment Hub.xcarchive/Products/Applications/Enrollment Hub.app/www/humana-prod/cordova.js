@@ -1,0 +1,1 @@
+console.log("Fake cordova resource in production environment");

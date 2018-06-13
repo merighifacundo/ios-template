@@ -1,0 +1,11 @@
+{
+  "name": "groupMedicare",
+  "id": "groupMedicare",
+  "mappedEntity": "Application",
+  "navType": "",
+  "sections": [],
+  "typeName": "Group Medicare",
+  "helper": "GroupMedicareFormHelper",
+  "group": "Group Individual",
+  "enable": true
+}

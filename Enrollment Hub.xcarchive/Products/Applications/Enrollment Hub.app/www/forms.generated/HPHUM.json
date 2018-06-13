@@ -1,0 +1,538 @@
+{
+  "name": "HPHUM",
+  "id": "HPHUM",
+  "title": "Humana Pharmacy (HP)",
+  "tabTitle": "Humana Pharmacy Consent Form",
+  "applicationType":"IND",
+  "mappedEntity": "HPHUM",
+  "sections": [
+    {
+      "name": "Member information",
+      "id": "HPHUM-Member-information",
+      "title": "Member information",
+      "index": 0,
+      "summaryMask": true,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "First name",
+          "id": "fieldFirstName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "fieldFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "maxlength": 20,
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "fieldMiddleInitial",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 3,
+          "type": "Text",
+          "mappedAttribute": "fieldMI",
+          "maxlength": 1,
+          "disabled": true,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true
+        },
+        {
+          "name": "Last Name",
+          "id": "fieldLastName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "fieldLastName",
+          "disabled": true
+        },
+        {
+          "name": "Address 1",
+          "id": "raStreet1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raStreet1",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true
+        },
+        {
+          "name": "Address 2",
+          "id": "raStreet2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "raStreet2",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "City",
+          "id": "raCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "restriction": "city",
+          "minlength": 2,
+          "mappedAttribute": "raCity",
+          "disabled": true
+        },
+        {
+          "name": "State",
+          "id": "HPHUM-memberState",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "ZIP",
+          "id": "HPHUM-memberZip",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "Zip",
+          "disableValidations": true,
+          "type": "ZipCode",
+          "maxlength": 5,
+          "minlength": 5,
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Email",
+          "id": "HPHUM-email",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciApplicantEmail",
+          "type": "Text",
+          "restriction": "email",
+          "disabled": false
+        },
+        {
+          "name": "",
+          "id": "HPHUM-emailDisclosure",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "content": "By providing your email, you consent to receiving information about Humana Pharmacy by email",
+          "mappedAttribute": "emailDisclosure",
+          "type": "Disclaimer",
+          "skipSummary": true
+        },
+        {
+          "name": "Date of Birth",
+          "id": "HPHUM-dateOfBirth",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "dob",
+          "type": "Datepicker",
+          "disabled": true
+        },
+        {
+          "name": "Gender",
+          "id": "HPHUM-gender",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "gender",
+          "type": "Radiogroup",
+          "source": [
+              {
+                "key": "Male",
+                "name": "Male"
+              },
+              {
+                "key": "Female",
+                "name": "Female"
+              }
+          ],
+          "disabled": true
+        },
+        {
+          "name": "Medicare Number",
+          "id": "HPHUM-memberMedicareNumber",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "disabled": true,
+          "mappedAttribute": "medicareNumber",
+          "type": "Text",
+          "restriction": "MedicareNumber"
+        },
+        {
+          "name": "Phone number",
+          "id": "ciApplicantPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "HPHUM-memberPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "ciApplicantPhone"
+                },
+                {
+                  "id": "HPHUM-memberPhoneType",
+                  "action": "forceChangeEvent",
+                  "value": ""
+                },
+                {
+                  "id": "HPHUM-memberPhoneType",
+                  "action": "clearIfEmpty"
+                },
+                {
+                  "action": "mandatory",
+                  "id": "HPHUM-memberPhoneType",
+                  "value": ""
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "disabled": true,
+          "mappedAttribute": "ciApplicantPhone",
+          "type": "Phone",
+          "restriction": "Phone"
+        },
+        {
+          "name": "Phone type",
+          "id": "HPHUM-memberPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "HPHUM-consentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "HPHUM-healthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "HPHUM-contactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "disabled": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciPhoneType",
+          "type": "Radiogroup",
+          "source": [
+                {
+                  "key": "cellphone",
+                  "name": "Cell Phone"
+                },
+                {
+                  "key": "home",
+                  "name": "Home (land line)"
+                }
+              ]
+          },
+        {
+          "name": "",
+          "id": "HPHUM-consentDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"Disclaimer",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionPlanInformation",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "HPHUM-healthContactDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "hpHumHealthContactDisclaimer",
+          "source": [
+            {
+              "key": "yes",
+              "name": "Yes"
+            },
+            {
+              "key": "no",
+              "name": "No"
+            }
+          ]
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionMarketing",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "HPHUM-contactMarketingDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "hpHumContactMarketingDisclaimer",
+          "source": [
+            {
+              "key": "yes",
+              "name": "Yes"
+            },
+            {
+              "key": "no",
+              "name": "No"
+            }
+          ]
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Acknowledgements",
+      "id": "HPHUM-Acknowledgements",
+      "title": "Acknowledgements",
+      "index": 1,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "HPHUM-ExpirationDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 12,
+          "type": "Disclaimer",
+          "content": "Unless canceled, this approval will expire two years from the signature date. If you choose to cancel, you must do so in writing by sending your name, address, date of birth and Humana member ID number to Humana MarketPoint, P.O. Box 14706, Lexington, KY 40512-4706. You also understand canceling won’t apply to any personal information already released. Humana will not release my personal information to third parties except as permitted under federal privacy laws. However, if my personal information is disclosed to third parties, Humana must notify me that my personal information can be disclosed and not be protected by these laws. I understand Humana also may receive direct or indirect payment from third parties as a result of the sale of certain products."
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Auth & Sign",
+      "id": "HPHUM-signature",
+      "title": "Auth & Sign",
+      "index": 2,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "",
+          "id": "HPHUM-disclaimer1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "content": "I give permission to Humana and its affiliates to send my personal information to Humana Pharmacy."
+        },
+        {
+          "name": "",
+          "id": "HPHUM-disclaimer2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "content": "Humana is a Medicare Advantage organization and a stand-alone prescription drug plan with a Medicare contract. Enrollment, in any Humana plan depends on contract renewal. Other pharmacies are available in your network. You should get your new prescription by mail 7-10 days after Humana Pharmacy has received your prescription and all the necessary information. It may take longer if they have to call you or your doctor with questions about the order. Refills should arrive within 5-7 days. If you do not receive your order within this time frame, please call Humana Pharmacy at 1-800-379-0092."
+        },
+        {
+            "name": "",
+            "id": "HPHUM-disclaimer3",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 12,
+            "type": "ImageDisclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}MultiLanguageDisclaimer",
+                "group":"PostEnrollmentDisclaimer"
+            }
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"AuthRoleSignatory",
+            "group":"PostEnrollmentDisclaimer"
+          },
+          "id": "HPHUM-signType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "HPHUM-relationshipToApplicant",
+                  "action": "showOrHide",
+                  "value": "LegalRepresentative",
+                  "fromField": "HPHUM-signType"
+                },
+                {
+                  "id": "HPHUM-legalRepDisclaimer",
+                  "action": "showOrHide",
+                  "value": "LegalRepresentative",
+                  "fromField": "HPHUM-signType"
+                },
+                {
+                  "id": "HPHUM-force-change",
+                  "action": "forceChangeEvent"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "signType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "self",
+              "name": "Self"
+            },
+            {
+              "key": "LegalRepresentative",
+              "name": "Legal Representative"
+            }
+          ]
+        },
+        {
+          "name": "Relationship to applicant",
+          "id": "HPHUM-relationshipToApplicant",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "relationshipToApplicant",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "spouse",
+              "name": "Spouse"
+            },
+            {
+              "key": "sibling",
+              "name": "Sibling"
+            },
+            {
+              "key": "parent",
+              "name": "Parent"
+            },
+            {
+              "key": "child",
+              "name": "Child"
+            },
+            {
+              "key": "agentBroker",
+              "name": "Agent/Broker"
+            },
+            {
+              "key": "friend",
+              "name": "Friend"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            },
+            {
+              "key": "other",
+              "name": "Other"
+            }
+          ]
+        },
+        {
+          "name": "Signature of Member/Legal Representative",
+          "id": "signature_user",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "alwaysMandatory": true,
+          "disabled": true,
+          "width": 5,
+          "type": "Signature",
+          "mappedAttribute": "signature"
+        }
+      ],
+      "hidden": false
+    },
+{
+  "name": "Agent Use Only",
+  "id": "HPHUM-AgentUse",
+  "title": "Agent Use Only",
+  "index": 4,
+  "subsections": [],
+  "fields": [
+    {
+      "id": "HPHUM-agentSAN",
+      "name": "Agent SAN",
+      "type": "Text",
+      "mappedAttribute": "agentSAN",
+      "mandatory": true,
+      "disabled": true,
+      "triggers": [],
+      "width": "5",
+      "maxlength": 35,
+      "restriction": "numbers"
+    }
+  ],
+  "hidden": false
+}
+],
+"helper": "HPFormHelper"
+}

@@ -1,0 +1,141 @@
+{
+    "sections": {
+        "location": {
+            "name": "location",
+            "status": "notStarted",
+            "visible":false,
+            "data": "",
+            "display":[
+                {   
+                    "section":{
+                        "name":"enrollmentType",
+                        "visible":true,
+                        "when": {
+                            "type":"status",
+                            "value":"complete"
+                        } 
+                    }
+                }
+            ]
+        },
+        "enrollmentType": {
+            "name": "enrollmentType",
+            "status": "notStarted",
+            "visible":false,
+            "data": "",
+            "display":[
+                {   
+                    "section":{
+                        "name":"eligibility",
+                        "visible":true,
+                        "when": {
+                            "type":"fieldCheck",
+                            "field":{
+                                "id":"enrollmentType",
+                                "value":"medicare"
+                            }
+                        }
+                    }
+                },
+                {   
+                    "section":{
+                        "name":"eligibility",
+                        "visible":false,  
+                        "when": {
+                            "type":"keyCheck",
+                            "key":"osb"
+                        }
+                    }
+                },
+                {   
+                    "section":{
+                        "name":"planListing",
+                        "visible":true ,
+                        "when": {
+                            "type":"keyCheck",
+                            "key":"medicare"
+                        }   
+                    }
+                    
+                },
+                {   
+                    "section":{
+                        "name":"planListing",
+                        "visible":false ,
+                        "when": {
+                            "type":"keyCheck",
+                            "key":"osb"
+                        }
+                    }
+                    
+                },
+                {
+                    "section": {
+                        "name": "osbPlanListing",
+                        "visible": true,
+                        "when": {
+                            "type":"keyCheck",
+                            "key":"osb"
+                        },
+                        "validations": [
+                            {
+                                "id": "osbAddressChange",
+                                "expectedValue":"true"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "section": {
+                        "name": "osbPlanListing",
+                        "visible": false,
+                        "when": {
+                            "type":"keyCheck",
+                            "key":"medicare"
+                        }
+                    }
+                },
+                {
+                    "section": {
+                        "name": "osbPlanListing",
+                        "visible": false,
+                        "when": {
+                            "type":"keyCheck",
+                            "key":""
+                        }
+                    }
+                }
+
+            ]
+        },
+        "eligibility": {
+            "name": "eligibility",
+            "status": "notStarted",
+            "visible":false,
+            "data": "",
+            "display":[],
+            "filter":"planListingFilter"
+        },
+        "memberSearch": {
+            "name": "memberSearch",
+            "status": "notStarted",
+            "visible": false,
+            "data": ""
+        },
+        "osbPlanListing": {
+            "name": "osbPlanListing",
+            "status": "notStarted",
+            "visible": false,
+            "data": "",
+            "display": []
+        },
+        "planListing": {
+            "name": "planListing",
+            "status": "notStarted",
+            "planTypeException":"PDP",
+            "visible":false,
+            "data": "",
+            "display":[]
+        }
+    }
+}

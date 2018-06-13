@@ -1,0 +1,824 @@
+{
+  "name": "PHICARE",
+  "id": "PHICARE",
+  "title": "Protected Health Information (PHI)",
+  "tabTitle": "Protected Health Information (PHI)",
+  "applicationType":"IND",
+  "mappedEntity": "PHICARE",
+  "sections": [
+    {
+        "name": "Disclaimer",
+        "id": "PHICARE-Disclaimer",
+        "title": "Disclaimer",
+        "index": 0,
+        "subsections": [],
+        "fields": [
+          {
+            "name": "",
+            "id": "PHICARE-humanaDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 12,
+            "type": "Disclaimer",
+            "contentQuery" : {
+              "addBrand": true,
+              "key":"PHIIntroduction",
+              "group":"PostEnrollmentDisclaimer"
+            }
+          }
+        ],
+        "hidden": false
+    },
+    {
+      "name": "Member information",
+      "id": "PHICARE-Member-information",
+      "title": "Member information",
+      "index": 1,
+      "summaryMask": true,
+      "subsections": [],
+      "fields": [
+        {
+          "name": "First name",
+          "id": "fieldFirstName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "fieldFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "maxlength": 20,
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "fieldMiddleInitial",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 2,
+          "type": "Text",
+          "mappedAttribute": "fieldMI",
+          "maxlength": 1,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Last Name",
+          "id": "fieldLastName",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "fieldLastName",
+          "disabled": true
+        },
+        {
+          "name": "Date of birth",
+          "id": "PHICARE-memberDateOfBirth",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "dob",
+          "type": "Datepicker",
+          "disabled": true
+        },
+        {
+          "name": "Address 1",
+          "id": "raStreet1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raStreet1",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true
+        },
+        {
+          "name": "Address 2",
+          "id": "memberAddress2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "raStreet2",
+          "type": "Text",
+          "restriction": "address",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "City",
+          "id": "raCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "restriction": "city",
+          "minlength": 2,
+          "mappedAttribute": "raCity",
+          "disabled": true
+        },
+        {
+          "name": "State",
+          "id": "memberState",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "raState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "ZIP code",
+          "id": "memberZip",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "Zip",
+          "type": "ZipCode",
+          "maxlength": 5,
+          "disableValidations": true,
+          "minlength": 5,
+          "disabled": true,
+          "skipSummary": true
+        },
+        {
+          "name": "Phone number",
+          "id": "ciApplicantPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHICARE-memberPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "ciApplicantPhone"
+                },
+                {
+                  "id": "PHICARE-memberPhoneType",
+                  "action": "forceChangeEvent",
+                  "value": ""
+                },
+                {
+                  "id": "PHICARE-memberPhoneType",
+                  "action": "clearIfEmpty"
+                },
+                {
+                  "action": "mandatory",
+                  "id": "PHICARE-memberPhoneType",
+                  "value": ""
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciApplicantPhone",
+          "type": "Phone",
+          "restriction": "Phone",
+          "disabled": true
+        },
+        {
+          "name": "Phone type",
+          "id": "PHICARE-memberPhoneType",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHICARE-consentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHICARE-healthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHICARE-contactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "ciPhoneType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "cellphone",
+              "name": "Cell Phone"
+            },
+            {
+              "key": "home",
+              "name": "Home (land line)"
+            }
+          ],
+          "disabled": true
+        },
+        {
+          "name": "",
+          "id": "PHICARE-consentDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"Disclaimer",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionPlanInformation",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHICARE-healthContactDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "phiCareHealthContactDisclaimer",
+          "source": "YES/NO"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionMarketing",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHICARE-contactMarketingDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "phiCareContactMarketingDisclaimer",
+          "source": "YES/NO"
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "PHI disclosure details",
+      "id": "PHI-disclosure-details",
+      "title": "PHI disclosure details",
+      "index": 2,
+      "subsections": [],
+      "fields": [
+        {
+          "name":"",
+          "id": "PHI-DisclosureDisclaimer",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "type": "Disclaimer",
+          "contentQuery" : {
+            "key":"PHIDisclosure",
+            "group":"PostEnrollmentDisclaimer"
+          }
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "name": "Information Disclosed to",
+      "id": "Information-Disclosed-to",
+      "title": "Information Disclosed to",
+      "index": 3,
+      "subsections": [],
+      "fields": [
+        {
+            "name":"",
+            "id": "PHI-InformationDisclosedDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 12,
+            "type": "Disclaimer",
+            "contentQuery" : {
+              "addBrand": true,
+              "key":"PHIInformationDisclosed",
+              "group":"PostEnrollmentDisclaimer"
+            }
+        },
+        {
+          "name": "",
+          "id": "individualOrOrganization",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "action": "showOrHide",
+                  "id": "informationFirstName",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "informationMiddleInitial",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "informationLastName",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "informationDateOfBirth",
+                  "value": "individual"
+                },
+                {
+                  "action": "showOrHide",
+                  "id": "informationOrganization",
+                  "value": "organization"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "individualOrOrganization",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "individual",
+              "name": "Individual"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            }
+          ]
+        },
+        {
+          "name": "First name",
+          "id": "informationFirstName",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationFirstName",
+          "type": "Text",
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "maxlength": 20,
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "Middle initial",
+          "id": "informationMiddleInitial",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 3,
+          "type": "Text",
+          "mappedAttribute": "informationMiddleInitial",
+          "maxlength": 1,
+          "restriction": {
+            "value": "onlyLetters",
+            "restrict": true
+          },
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "Last Name",
+          "id": "informationLastName",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "maxlength": 35,
+          "restriction": {
+            "value": "lettersAndSpace",
+            "restrict": true
+          },
+          "mappedAttribute": "informationLastName"
+        },
+        {
+          "name": "Date of birth",
+          "id": "informationDateOfBirth",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "restriction": "dob",
+          "mappedAttribute": "informationDateOfBirth",
+          "type": "Datepicker",
+          "summaryMask": true
+        },
+        {
+          "name": "Organization",
+          "id": "informationOrganization",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "type": "Text",
+          "width": 5,
+          "mappedAttribute": "informationOrganization",
+          "restriction": "letters"
+        },
+        {
+          "name": "Address 1",
+          "id": "informationAddress1",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationAddress1",
+          "type": "Text",
+          "restriction": "address",
+          "summaryMask": true
+        },
+        {
+          "name": "Address 2",
+          "id": "informationAddress2",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "informationAddress2",
+          "type": "Text",
+          "restriction": "address",
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "ZIP code",
+          "id": "informationZip",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationZip",
+          "type": "ZipCode",
+          "disableValidations": true,
+          "maxlength": 5,
+          "minlength": 5,
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "City",
+          "id": "informationCity",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "type": "Text",
+          "minlength": 2,
+          "mappedAttribute": "informationCity"
+        },
+        {
+          "name": "State",
+          "id": "informationState",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationState",
+          "type": "Dropdown",
+          "datasource": "state",
+          "skipSummary": true,
+          "summaryMask": true
+        },
+        {
+          "name": "County",
+          "id": "informationCounty",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationCounty",
+          "type": "Text",
+          "summaryMask": true
+        },
+        {
+          "name": "Phone number",
+          "id": "informationPhone",
+          "triggers": [
+            {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "informationPhoneType",
+                  "action": "showOrHide",
+                  "checkEmpty": true,
+                  "value": "",
+                  "fromField": "informationPhone"
+                }
+              ]
+            }
+          ],
+          "hidden": false,
+          "mandatory": false,
+          "width": 5,
+          "mappedAttribute": "informationPhone",
+          "type": "Phone",
+          "restriction": "Phone",
+          "summaryMask": true
+        },
+        {
+          "name": "Phone type",
+          "id": "informationPhoneType",
+          "triggers": [
+           {
+              "name": "onChange",
+              "actions": [
+                {
+                  "id": "PHICARE-infoConsentDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHICARE-infoHealthContactDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                },
+                {
+                  "id": "PHICARE-infoContactMarketingDisclaimer",
+                  "action": "showOrHide",
+                  "value": "cellphone"
+                }
+              ]
+            }
+          ],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "informationPhoneType",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "cellphone",
+              "name": "Cell Phone"
+            },
+            {
+              "key": "home",
+              "name": "Home (land line)"
+            }
+          ],
+          "summaryMask": true
+        },
+        {
+          "name": "",
+          "id": "PHICARE-infoConsentDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": false,
+          "width": 12,
+          "contentQuery" : {
+            "addBrand": true,
+            "key":"Disclaimer",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "type": "Disclaimer"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionPlanInformation",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHICARE-infoHealthContactDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "informationPhiCareHealthContactDisclaimer",
+          "source": "YES/NO"
+        },
+        {
+          "nameQuery" : {
+            "addBrand":true,
+            "key":"QuestionMarketing",
+            "group":"FormIndividualPreferenceFCC"
+          },
+          "id": "PHICARE-infoContactMarketingDisclaimer",
+          "triggers": [],
+          "hidden": true,
+          "mandatory": true,
+          "width": 5,
+          "type": "Radiogroup",
+          "mappedAttribute": "informationPhiCareContactMarketingDisclaimer",
+          "source": "YES/NO"
+        },
+        {
+          "id": "informationGender",
+          "name": "Gender",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "Male",
+              "name": "Male"
+            },
+            {
+              "key": "Female",
+              "name": "Female"
+            }
+          ],
+          "mappedAttribute": "phiGender",
+          "mandatory": true,
+          "triggers": [],
+          "width": "5",
+          "summaryMask": true
+        },
+        {
+            "name": "Email",
+            "id": "informationEmail",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "mappedAttribute": "informationEmail",
+            "type": "Text",
+            "restriction": "email",
+            "summaryMask": true
+        },
+        {
+          "name": "Relationship to applicant",
+          "id": "relationshipToApplicant",
+          "triggers": [],
+          "hidden": false,
+          "mandatory": true,
+          "width": 5,
+          "mappedAttribute": "relationshipToApplicant",
+          "type": "Radiogroup",
+          "source": [
+            {
+              "key": "spouse",
+              "name": "Spouse"
+            },
+            {
+              "key": "sibling",
+              "name": "Sibling"
+            },
+            {
+              "key": "parent",
+              "name": "Parent"
+            },
+            {
+              "key": "child",
+              "name": "Child"
+            },
+            {
+              "key": "agentBroker",
+              "name": "Agent/Broker"
+            },
+            {
+              "key": "friend",
+              "name": "Friend"
+            },
+            {
+              "key": "organization",
+              "name": "Organization"
+            }
+          ],
+          "summaryMask": true
+        }
+      ],
+      "hidden": false
+    },
+    {
+        "name": "Auth & Sign",
+        "id": "PHICARE-signature",
+        "title": "Auth & Sign",
+        "index": 4,
+        "subsections": [],
+        "fields": [
+          {
+            "name": "",
+            "id": "PHI-AuthCarePlusPlanDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "contentQuery" : {
+                "key":"AuthCarePlusPlan",
+                "group":"PostEnrollmentDisclaimer"
+            }
+          },
+          {
+            "name": "",
+            "id": "PHI-DisclosureDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "contentQuery" : {
+                "key":"PHIDisclosure",
+                "group":"PostEnrollmentDisclaimer"
+            }
+          },
+          {
+            "name": "",
+            "id": "PHIHUM-LegalRepresentativesDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 5,
+            "type": "Disclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}LegalRepresentatives",
+                "group":"PostEnrollmentDisclaimer"
+            }
+        },
+        {
+            "name": "",
+            "id": "PHIHUM-MultiLanguageDisclaimer",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": false,
+            "width": 12,
+            "type": "ImageDisclaimer",
+            "contentQuery" : {
+                "addBrand":true,
+                "key":"{{brandName}}MultiLanguageDisclaimer",
+                "group":"PostEnrollmentDisclaimer"
+            }
+        },
+        {
+            "name": "Signatory type",
+            "id": "signType",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": true,
+            "width": 5,
+            "mappedAttribute": "signType",
+            "type": "Radiogroup",
+            "source": [
+              {
+                "key": "Member",
+                "name": "Self"
+              },
+              {
+                "key": "LegalRepresentative",
+                "name": "Legal Representative"
+              }
+            ]
+          },
+          {
+            "name": "Signature of Member/Legal Representative",
+            "id": "signature_user",
+            "triggers": [],
+            "hidden": false,
+            "mandatory": true,
+            "alwaysMandatory": true,
+            "disabled": true,
+            "width": 5,
+            "type": "Signature",
+            "mappedAttribute": "signature"
+          }
+        ],
+        "hidden": false
+    }
+  ],
+  "helper": "PHIFormHelper"
+}

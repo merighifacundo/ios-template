@@ -1,0 +1,54 @@
+<!doctype html>
+<html  manifest="app.manifest">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Enrollment Hub</title>
+    <!-- environment: humana -->
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,'/src'}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,'/src'}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-cloak>
+    <guided-tour></guided-tour>
+    <modal></modal>
+    <spinner></spinner>
+    <callout></callout>
+    <alerts></alerts>
+    <backdrop></backdrop>
+    <div class="container-fluid main-container" ng-view></div>
+
+    <!-- build:js(.tmp/serve) scripts/npm.js -->
+    <!-- npm:js -->
+    <!-- js vendor files will be inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- build:js('/src') scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp/serve) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/environment.js?timestamp=$version$"></script>
+  </body>
+</html>
